@@ -1,0 +1,273 @@
+
+.Login{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.LoginDS{
+    width: 50%;
+    height: 100%;
+    background: #ff5900;
+    border-radius: 0% 25% 0% 25% / 0% 25% 0% 25%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.LoginDS .LoginImg{
+    display: grid;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    left: 0;
+    right: 0;
+    top: 50%;
+}
+.LoginDS .LoginImg .imgdivsheild{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+.LoginDS .LoginImg img{
+    width: 35%;
+    /* filter: drop-shadow(0px 20px 10px rgba(44, 44, 44, 0.174)); */
+    padding: 20px;
+    
+}
+
+/* @keyframes floating {
+    from { transform: translate(0,  0px);
+     }
+    65%  { transform: translate(0, 15px);}
+    to   { transform: translate(0, -0px); }
+} */
+
+.LoginDS .LoginImg h1{
+    color: rgb(255, 255, 255);
+    display: grid;
+    justify-content: center;
+    flex-direction: column;
+    font-family: Poppins,sans-serif;
+    font-size: 2rem;
+    line-height: 1.4;
+    margin-bottom: 1rem;
+    margin-top: 1.5rem;
+}
+.LoginDS .LoginImg p{
+    color: rgba(255, 255, 255, 0.747);
+    display: grid;
+    justify-content: center;
+    flex-direction: column;
+    font-family: Poppins,sans-serif;
+    text-align: center;
+    font-size: 1rem;
+    line-height: 1.4;
+}
+.LoginDiv{
+    width: 50%;
+    height: 100%;
+    display: grid;
+    justify-content: center;
+}
+
+.LoginDiv .LoginInfo{
+    display: grid;
+    justify-content: center;
+    align-items: center;
+}
+.LoginDiv .LoginInfo .imglg{
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    
+}
+.LoginDiv .LoginInfo .imglg img{
+    width: 30%;
+    height: 30%;
+}
+
+.LoginDiv .LoginInfo h1{
+    color: #ff5900;
+    font-family: Poppins,sans-serif;
+    text-align: center;
+    
+}
+
+.LoginDiv .LoginInfo p{
+    color: #ff5900;
+    font-family: Poppins,sans-serif;
+    text-align: center;
+    font-size: 1rem;
+    line-height: 1.4;
+    margin-bottom: 2rem;
+}
+
+  button,
+  .inputLg {
+    border: 0;
+    width: 100%;
+    height: 60px;
+    background: transparent;
+    font-family: inherit;
+    font-size: 16px;
+    outline: none;
+  }
+
+  .formulaire{
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    width: 100%;
+  }
+  
+  .textbox {
+    position: relative;
+    margin-bottom: 16px;
+  }
+  .textbox .usr{
+    color: #ff5900;
+    top: 50%;
+    translate: 0 -230%;
+    left: 0;
+    opacity: 0.7;
+    pointer-events: none;
+    transition: 0.5s;
+  }
+  .textbox span {
+    color: #ff5900;
+    top: 50%;
+    translate: 0 -155%;
+    left: 0;
+    opacity: 0.7;
+    pointer-events: none;
+    transition: 0.5s;
+  }
+  
+  .formulaire .textbox .inputLg {
+    padding: 0 24px 0 36px;
+    border-bottom: 2px solid #ff5900;
+    color: #ff5900;
+    height: 50px;
+    font-family: 'Mulish',sans-serif;
+    font-size: 0.90rem;
+    font-weight: 500;
+    line-height: 1.6;
+  }
+  
+  :is(.textbox .inputLg:focus, .textbox .inputLg:valid) ~ label {
+    translate: -40px -55px;
+    scale: 0.875;
+    color: #ff5900;
+
+  }
+  :is(.textbox .inputLg:focus, .textbox .inputLg:valid) ~ .usr {
+    color: #ff5900;
+    opacity: 1;
+  }
+  :is(.textbox .inputLg:focus, .textbox .inputLg:valid) ~ span {
+    color: #ff5900;
+    opacity: 1;
+  }
+  
+  .formulaire .textbox label {
+    position: absolute;
+    top: 50%;
+    left: 36px;
+    translate: 0 -115%;
+    color: #ff5900;
+    pointer-events: none;
+    transition: 0.5s;
+    font-size: 16px;
+    font-weight: 600;
+    font-family: 'Mulish',sans-serif;
+    font-weight: 700;
+    line-height: 1.6;
+  }
+  
+  .formulaire button {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    padding: 0 24px;
+    border-radius: 6px;
+    background: #ff5900;
+    color: #f9f9f9;
+    border: 0;
+    font-family: inherit;
+    font-weight: 600;
+    margin: 3px;
+    font-family: 'Mulish',sans-serif;
+    font-weight: 500;
+    line-height: 1.6;
+  }
+  .formulaire button:focus{
+    background: #ff5900;
+    color: #f9f9f9;
+  }
+  
+  .btnbnr{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+  #btnshowpwd{
+    width: 25%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    padding: 0 24px;
+    border-radius: 6px;
+    background: #ff5900;
+    color: #f9f9f9;
+    border: 0;
+    font-family: inherit;
+    font-weight: 600;
+    margin: 3px;
+  }
+  #showpwdicon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
+  .textbox {
+    margin-bottom: 1.5rem;
+  }
+  
+  
+  .textbox #showpwdicon:hover {
+    color: #5d5d5d;
+  }
+  
+  .textbox .inputLg[type="password"]::-ms-reveal,
+  .textbox .inputLg[type="password"]::-ms-clear {
+    display: none;
+  }
+  
+  .textbox .inputLg[type="password"]::-webkit-contacts-auto-fill-button {
+    visibility: hidden;
+    pointer-events: none;
+    position: absolute;
+    right: 0;
+  }
+  @media screen and (max-width: 800px){
+    .Login{
+      display: block;
+    }
+    .LoginDS{
+      width: 100%;
+     
+    }
+    .LoginDiv{
+      width: 100%;
+
+    }
+  }
