@@ -3,6 +3,18 @@ import { Scanner } from '@yudiel/react-qr-scanner';
 
 function QRscanner() {
     const [qrscan, setQrscan] = useState('No result');
+    const [photo, setPhoto] = useState(null);
+
+    const handlePhotoChange = (event) => {
+        const file = event.target.files[0];
+        setPhoto(file);
+    };
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        // Handle form submission, including photo data
+        console.log('Submitted photo:', photo);
+    };
 
     return (
         <div style={{ height: 240, width: 320 }}>
@@ -27,6 +39,18 @@ function QRscanner() {
                 value={qrscan} // Use qrscan state variable as the value for the textarea
                 readOnly // Ensure the textarea is read-only to prevent manual editing
             />
+            <form onSubmit={handleSubmit}>
+                <label htmlFor="photo">Take a photo:</label><br />
+                <input
+                    type="file"
+                    id="photo"
+                    name="photo"
+                    accept="image/*"
+                    capture="camera"
+                    onChange={handlePhotoChange}
+                /><br />
+                <button type="submit">Submit</button>
+            </form>
         </div>
     );
 }

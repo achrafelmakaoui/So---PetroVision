@@ -1,0 +1,271 @@
+.SuperviseurShopUI{
+    width: 100%;
+    height: 100vh;
+    padding: 24px;
+}
+.headerIcons-supShop{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    border-bottom: 1px solid #f6f6f6;
+    padding-bottom: 1.75rem;
+    gap: 10px;
+    width: 100%;
+}
+.icon-search-Supshop{
+    position: absolute;
+    cursor: pointer;
+    transition: 1s;
+    /* top: 50%; */
+    translate: 1420% 60%;
+    /* left: 0; */
+    color: #b3b3b3;
+}
+.search-supShop{
+    width:20%;
+}
+.search-supShop input{
+    background: transparent;
+    border: 1px solid #b3b3b3;
+    padding: 0.75em 2.5em 0.75em 1em;
+    border-radius: 50px;
+    transition: 1s;
+    color: #515151;
+    width: 100%;
+}
+.search-supShop input::-ms-clear { display: none; } /* for Internet Explorer */
+.search-supShop input::-webkit-search-cancel-button { display: none; } /* for Chrome, Safari, and Opera */
+.search-supShop input::-moz-search-cancel { display: none; } /* for Firefox */
+.search-supShop input:focus{
+    outline: none;
+    border: 1px solid #ff5900;
+    transition: 1s;
+}
+.search-supShop input:focus ~ .icon-search-Supshop{
+    color:#ff5900;
+    transition: 1s;
+}
+.icon-search-Supshop:hover{
+    color: #ff5900;
+    transition: 1s;
+}
+.bell-supShop{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 2.3rem;
+    height: 2.3rem;
+    background-color: #ff5900d9;
+    border-radius: 50%;
+    cursor: pointer;
+}
+.addSupShopIcon-supShop{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 2.3rem;
+    height: 2.3rem;
+    background-color: #ff5900d9;
+    border-radius: 50%;
+    cursor: pointer;
+}
+.cardsDsSupShop{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+.cardDesignSupShop{
+    width: calc(25% - 20px);
+    height: fit-content;
+    background-color: white;
+    margin-bottom: 0.85rem;
+}
+.cardSupShophead{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ff5900;
+    border-top-left-radius: 50%;
+    border-top-right-radius: 50%;
+}
+.cardSupShopImg{
+    width: 80px;
+    height: 80px;
+    background-color: #ff5900;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    top: 20%;
+    top: 50%;
+    translate: 0% 50%;
+    left: 0;
+}
+.cardSupShopImg img{
+    width: 65%;
+}
+
+.cardSupShopIdentity{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding-bottom: 0.5rem;
+    padding-top: 0.5em;
+    border-left: 1px solid #b3b3b3;
+    border-right: 1px solid #b3b3b3;
+    
+}
+.cardSupShopIdentity h5{
+    font-size: 10px;
+    font-weight: 700;
+    color: #29345C;
+    font-style: italic;
+}
+.cardSupShopIdentity h3{
+    font-family: Poppins,sans-serif;
+    font-size: 1rem;
+    line-height: 1.4;
+    color: #29345C;
+}
+.cardSupShopIdentity h4{
+    font-size: 13px;
+    font-weight: 800;
+    color: #29345C;
+    text-transform: capitalize;
+    margin-bottom: 5px;
+}
+.cardSupShopCt{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding-bottom: 0.5rem;
+    border-left: 1px solid #b3b3b3;
+    border-right: 1px solid #b3b3b3;
+}
+.cardSupShopCin{
+    width: 33%;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    padding-top: 1rem;
+}
+.cardSupShopCin span{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Poppins,sans-serif;
+    font-size: 0.8rem;
+    line-height: 1.4;
+    font-weight: bolder;
+    color: #ff5900;
+}
+.cardSupShopTel{
+    width: 33%;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    padding-top: 1rem;
+}
+.cardSupShopTel span{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Poppins,sans-serif;
+    font-size: 0.8rem;
+    line-height: 1.4;
+    font-weight: bolder;
+    color: #ff5900;
+}
+.cardSupShopDelUpd{
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-left: 1px solid #b3b3b3;
+    border-right: 1px solid #b3b3b3;
+    border-top: 1px solid #b3b3b3;
+    border-bottom: 1px solid #b3b3b3;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+.cardSupShopUpd{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    border-right: 1px solid #b3b3b3;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.cardSupShopUpd svg{
+    cursor: pointer;
+    transition: 0.5s;
+}
+.cardSupShopUpd svg:hover{
+    stroke: #29345C;
+}
+.cardSupShopDel{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.cardSupShopDel svg{
+    cursor: pointer;
+    transition: 0.5s;
+}
+.cardSupShopDel svg:hover{
+    stroke: #29345C;
+}
+
+.filterSupShop{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin-top: 1.35rem;
+    margin-bottom: 1.7rem;
+}
+.titleFilter-supShop{
+    width: 25%;
+}
+.titleFilter-supShop h2{
+    font-family: Poppins,sans-serif;
+    font-size: 1.5rem;
+    line-height: 1.4;
+    color: #ff5900;
+}
+.filterSupShopSt{
+    display: flex;
+    align-items: center;
+    width: 50%;
+    gap: 20px;
+}
+.titFilterSupShopStation h3{
+    font-family: Poppins,sans-serif;
+    font-size: 1.1rem;
+    line-height: 1.4;
+    color: #ff5900;
+}
+.titFilterSupShopStatInp{
+    width: 60%;
+}
+
+.titFilterSupShopStatInp input{
+    width: 100%;
+    padding: 0.2rem 0.5rem 0.2rem 0.5rem;
+    border-radius: 5px;
+    outline: none;
+    border: 1px solid #b3b3b3;
+    color: 
+    #515151;
+}
+
+.titFilterSupShopStatInp input:focus{
+    border: 1px solid #ff5900;
+}
+
