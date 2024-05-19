@@ -5,12 +5,20 @@ import  logo from '../Assets/login.png'
 import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUserShield, faKey, faArrowRight, faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons'
+import { useDispatch, useSelector } from 'react-redux';
+import { login } from "../redux/apiCalls";
 
 const Login = () => {
     const [passwordType, setPasswordType] = useState('password');
-    const [username, setUsername] = useState("");
+    const [cin, setCin] = useState("");
     const [password, setPassword] = useState("");
+    const dispatch = useDispatch();
+    const { isFetching} = useSelector((state) => state.user);
 
+    const handleClick = (e) => {
+        e.preventDefault();
+        login(dispatch, { cin, password });
+    };
 
     const togglePasswordVisibility = (e) => {
         e.preventDefault();
@@ -39,8 +47,8 @@ const Login = () => {
             <div className='LoginForm'>
             <form className="formulaire">
                 <div className="textbox">
-                    <input type="text" className='inputLg' onChange={(e) => setUsername(e.target.value)} autoComplete="username" placeholder='Entre Nom...'/>
-                    <label>Nom</label>
+                    <input type="text" className='inputLg' onChange={(e) => setCin(e.target.value)} autoComplete="cin" placeholder='Entre Cin...'/>
+                    <label>Cin</label>
                     <FontAwesomeIcon icon={faUserShield} className='usr'/>
                 </div>
                 <div className="textbox">
@@ -49,7 +57,7 @@ const Login = () => {
                     <FontAwesomeIcon icon={faKey} className='usr'/>
                 </div>
                 <div className='btnbnr'>
-                    <button type="submit">
+                    <button type="submit" onClick={handleClick} disabled={isFetching}>
                         Se Connecter
                         <FontAwesomeIcon icon={faArrowRight} />
                     </button>

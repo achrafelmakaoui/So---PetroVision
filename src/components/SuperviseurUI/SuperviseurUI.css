@@ -59,7 +59,7 @@
     align-items: center;
     width: 2.3rem;
     height: 2.3rem;
-    background-color: #ff5900d9;
+    background-color: #1edd4b;
     border-radius: 50%;
     cursor: pointer;
 }
@@ -83,20 +83,23 @@
     border-top-right-radius: 50%;
 }
 .cardSupImg{
-    width: 80px;
-    height: 80px;
-    background-color: #ff5900;
+    width: 70px;
+    height: 70px;
+    /* background-color: #ff5900; */
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: 50%;
+    /* border-radius: 50%; */
     top: 20%;
     top: 50%;
     translate: 0% 50%;
     left: 0;
 }
 .cardSupImg img{
-    width: 65%;
+    width: 100%;
+    height: 100%;
+    background-color: #ff5900;
+    border-radius: 50%;
 }
 
 .cardSupIdentity{
@@ -121,10 +124,11 @@
     font-size: 1rem;
     line-height: 1.4;
     color: #29345C;
+    text-transform: uppercase;
 }
 .cardSupIdentity h4{
     font-size: 13px;
-    font-weight: 800;
+    font-weight: 700;
     color: #29345C;
     text-transform: capitalize;
     margin-bottom: 5px;
@@ -219,14 +223,15 @@
 
 .filterSup{
     display: flex;
+    justify-content: space-between;
     align-items: center;
     width: 100%;
     margin-top: 1.35rem;
     margin-bottom: 1.7rem;
 }
-.titleFilter-sup{
+/* .titleFilter-sup{
     width: 25%;
-}
+} */
 .titleFilter-sup h2{
     font-family: Poppins,sans-serif;
     font-size: 1.5rem;
@@ -236,7 +241,7 @@
 .filterSupSt{
     display: flex;
     align-items: center;
-    width: 50%;
+    /* width: 50%; */
     gap: 20px;
 }
 .titFilterSupStation h3{
@@ -245,18 +250,43 @@
     line-height: 1.4;
     color: #ff5900;
 }
-.titFilterSupStatInp{
+/* .titFilterSupStatInp{
     width: 60%;
-}
+} */
 
 .titFilterSupStatInp input{
-    width: 100%;
-    padding: 0.2rem 0.5rem 0.2rem 0.5rem;
-    border-radius: 5px;
+    /* width: 100%; */
+    padding: 0.5rem 0.8rem 0.5rem 0.8rem;
+    border-radius: 50px;
     outline: none;
     border: 1px solid #b3b3b3;
     color: 
     #515151;
+}
+.titFilterSupStatInp svg{
+    position: absolute;
+    cursor: pointer;
+    transition: 1s;
+    /* top: 50%; */
+    translate: 1100% 60%;
+    /* left: 0; */
+    color: #b3b3b3;
+}
+.titFilterSupStatInp input::-ms-clear { display: none; } /* for Internet Explorer */
+.titFilterSupStatInp input::-webkit-search-cancel-button { display: none; } /* for Chrome, Safari, and Opera */
+.titFilterSupStatInp input::-moz-search-cancel { display: none; } /* for Firefox */
+.titFilterSupStatInp input:focus{
+    outline: none;
+    border: 1px solid #ff5900;
+    transition: 1s;
+}
+.titFilterSupStatInp input:focus ~ svg{
+    color:#ff5900;
+    transition: 1s;
+}
+svg:hover{
+    color: #ff5900;
+    transition: 1s;
 }
 
 .titFilterSupStatInp input:focus{

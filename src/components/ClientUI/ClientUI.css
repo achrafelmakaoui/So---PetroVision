@@ -59,7 +59,7 @@
     align-items: center;
     width: 2.3rem;
     height: 2.3rem;
-    background-color: #ff5900d9;
+    background-color: #1edd4b;
     border-radius: 50%;
     cursor: pointer;
 }
@@ -83,20 +83,23 @@
     border-top-right-radius: 50%;
 }
 .cardClientImg{
-    width: 80px;
-    height: 80px;
-    background-color: #ff5900;
+    width: 70px;
+    height: 70px;
+    /* background-color: #ff5900; */
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: 50%;
+    /* border-radius: 50%; */
     top: 20%;
     top: 50%;
     translate: 0% 50%;
     left: 0;
 }
 .cardClientImg img{
-    width: 65%;
+    width: 100%;
+    height: 100%;
+    background-color: #ff5900;
+    border-radius: 50%;
 }
 .cardClientScoore{
     display: flex;
@@ -157,10 +160,11 @@
     font-size: 1rem;
     line-height: 1.4;
     color: #29345C;
+    text-transform: uppercase;
 }
 .cardClientIdentity h4{
     font-size: 13px;
-    font-weight: 800;
+    font-weight: 700;
     color: #29345C;
     text-transform: capitalize;
     margin-bottom: 5px;
@@ -199,6 +203,7 @@
     align-items: center;
     width: 50%;
     padding-top: 10px;
+    border-right: 1px solid #b3b3b3;
     padding-bottom: 10px;
 }
 .cardClientDel svg{
@@ -208,7 +213,21 @@
 .cardClientDel svg:hover{
     stroke: #29345C;
 }
-
+.cardClientMrInfo{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.cardClientMrInfo svg{
+  cursor: pointer;
+  transition: 0.5s;
+}
+.cardClientMrInfo svg:hover{
+  stroke: #29345C;
+}
 .filterClient{
     display: flex;
     align-items: center;

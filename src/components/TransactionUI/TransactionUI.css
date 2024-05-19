@@ -31,7 +31,16 @@
     padding-bottom: 1.75rem;
     gap: 10px;
 }
-
+.transactionAddIcon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 2.3rem;
+    height: 2.3rem;
+    background-color: #1edd4b;
+    border-radius: 50%;
+    cursor: pointer;
+}
 .bell{
     display: flex;
     justify-content: center;
@@ -50,42 +59,136 @@
   height: fit-content;
 }
 .filterTransactions{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
   padding: 0.85rem 0rem;
   border-bottom: 1px solid #b3b3b3;
+  column-gap: 20px;
 }
-.icon-search-transaction{
-  cursor: pointer;
-  transition: 1s;
-  top: 50%;
-  translate: 135% 0%;
-  left: 0;
-  color: #b3b3b3;
+.search-transaction{
+  padding-left: 1rem;
+  width: 20%;
+}
+.serachByNumeroBon{
+  width: 100%;
 }
 .search-transaction input{
   background: transparent;
   border: 1px solid #b3b3b3;
-  padding: 0.5em 1em 0.5em 2em;
+  padding: 0.4rem 0.2rem 0.4rem 1rem;
   border-radius: 8px;
   transition: 1s;
   color: #515151;
   font-family: Poppins,sans-serif;
+  width: 100%;
 }
-.search-transaction input::-ms-clear { display: none; } /* for Internet Explorer */
-.search-transaction input::-webkit-search-cancel-button { display: none; } /* for Chrome, Safari, and Opera */
-.search-transaction input::-moz-search-cancel { display: none; } /* for Firefox */
 .search-transaction input:focus{
   outline: none;
   border: 1px solid #ff5900;
   transition: 1s;
 }
-.search-transaction input:focus ~ .icon-search-transaction{
-  color:#ff5900;
+.transactionFilterMois{
+  width: 20%;
+}
+.transactionFilterMoisSel{
+  width: 100%;
+}
+.transactionFilterMoisSel select{
+  font-family: Poppins,sans-serif;
+  font-size: 0.8rem;
+  line-height: 1.4;
+  padding: 0.4rem 0.8rem 0.4rem 0.8rem;
+  border-radius: 8px;
+  outline: none;
+  border: 1px solid #b3b3b3;
+  cursor: pointer;
+  color: #515151;
+  width: 100%;
+
+}
+.transactionFilterMoisSel select option{
+  font-family: Poppins,sans-serif;
+  font-size: 0.8rem;
+  line-height: 1.4;
+  cursor: pointer;
+}
+  
+.transactionFilterJour{
+  width: 20%;
+}
+.transactionFilterJourSel{
+  width: 100%;
+}
+.transactionFilterJourSel select{
+  font-family: Poppins,sans-serif;
+  font-size: 0.8rem;
+  line-height: 1.4;
+  padding: 0.4rem 0.8rem 0.4rem 0.8rem;
+  border-radius: 8px;
+  outline: none;
+  border: 1px solid #b3b3b3;
+  cursor: pointer;
+  color: #515151;
+  width: 100%;
+
+}
+.transactionFilterJourSel select option{
+  font-family: Poppins,sans-serif;
+  font-size: 0.8rem;
+  line-height: 1.4;
+  cursor: pointer;
+}
+
+.transactionFilterStatus{
+  width: 20%;
+}
+.transactionFilterStatusSel{
+  width: 100%;
+}
+.transactionFilterStatusSel select{
+  font-family: Poppins,sans-serif;
+  font-size: 0.8rem;
+  line-height: 1.4;
+  padding: 0.4rem 0.8rem 0.4rem 0.8rem;
+  border-radius: 8px;
+  outline: none;
+  border: 1px solid #b3b3b3;
+  cursor: pointer;
+  width: 100%;
+  color: #515151;
+}
+.transactionFilterStatusSel select option{
+  font-family: Poppins,sans-serif;
+  font-size: 0.8rem;
+  line-height: 1.4;
+  cursor: pointer;
+}
+
+.transactionFilterStation{
+  padding-right: 1rem;
+  width: 20%;
+}
+.transactionFilterStationInp{
+  width: 100%;
+}
+.transactionFilterStationInp input{
+  background: transparent;
+  border: 1px solid #b3b3b3;
+  padding: 0.4rem 0.2rem 0.4rem 1rem;
+  border-radius: 8px;
+  transition: 1s;
+  color: #515151;
+  font-family: Poppins,sans-serif;
+  width: 100%;
+}
+.transactionFilterStationInp input:focus{
+  outline: none;
+  border: 1px solid #ff5900;
   transition: 1s;
 }
-.icon-search-transaction:hover{
-  color: #ff5900;
-  transition: 1s;
-}
+
 .TransactionTableDs{
   max-height: 512px;
   overflow-y: scroll;
@@ -106,7 +209,8 @@
   border-bottom: none;
 }
 .trHead th{
-  background-color: #ff5900;
+  background-color: rgba(69, 168, 255, 0.663);
+  /* background-color: #ff5900d9; */
   padding: 0.85rem 0rem;
   font-family: Poppins,sans-serif;
   color: white;
@@ -123,7 +227,7 @@
   width: 40px;
   aspect-ratio: 3/2;
   object-fit: cover;
-  background-color: #ff5900;
+  background-color: rgba(69, 168, 255, 0.663);
   border-radius: 5px;
 }
 .transactionOwner-Name{
@@ -183,6 +287,20 @@
   color: #740505;
   font-size: 14px;
 }
+.statusDvenCours{
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    gap: 10px;
+    background-color: rgba(69, 168, 255, 0.663);
+    padding: 0.25rem 0.5rem;
+    border-radius: 5px;
+}
+.statusDvenCours span{
+  font-family: Poppins,sans-serif;
+  color: #0b3f6c;
+  font-size: 14px;
+}
 .ActionsInfo{
   display: flex;
   gap: 10px;
@@ -193,7 +311,7 @@
     align-items: center;
     width: 1.9rem;
     height: 1.9rem;
-    background-color: #ff5900d9;
+    background-color: #ff0800d9;
     border-radius: 5px;
     cursor: pointer;
 }
@@ -204,7 +322,7 @@
     align-items: center;
     width: 1.9rem;
     height: 1.9rem;
-    background-color: #ff5900d9;
+    background-color: #0055ffd9;
     border-radius: 5px;
     cursor: pointer;
 }
@@ -215,7 +333,7 @@
   align-items: center;
   width: 1.9rem;
   height: 1.9rem;
-  background-color: #ff5900d9;
+  background-color: #00a2ffd9;
   border-radius: 5px;
   cursor: pointer;
 }

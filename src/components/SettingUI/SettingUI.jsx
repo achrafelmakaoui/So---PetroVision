@@ -1,19 +1,68 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './SettingUI.css'
 import AdminIcon from '../Assets/AdminIcon.png'
 import { motion } from "framer-motion"
-
+import { useDispatch, useSelector } from 'react-redux';
+import axios from 'axios'
+import { logout } from '../redux/userRedux';
+import UpdateUser from '../UpdateUser/UpdateUser'
 
 const SettingUI = () => {
-    const [DeleteAlert,setDeleteAlert]= useState(false);
+  const [DeleteAlert,setDeleteAlert]= useState(false);
+  const [user,setUser]= useState({});
+  const [updateUser,setUpdateUser]= useState(false);
 
-      
+
+  const handelClickUpdateUser = () => {
+    setUpdateUser(true);
+  }
+  
+  const dispatch = useDispatch();
+
   const handelClickDeleteBtn = () => {
     setDeleteAlert(true);
   }
   const handelClickCloseIcon = () => {
     setDeleteAlert(false);
+    setUpdateUser(false);
   }
+
+  const currentUserId = useSelector((state) => state.user.currentUser._id);
+
+  const handleDelete = () => {
+    axios.delete(`http://localhost:5000/api/users/${currentUserId}`)
+      .then(response => {
+        console.log(response.data);
+        dispatch(logout());
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
+
+  useEffect(() => {
+    const getUser = async () => {
+      try {
+        const res = await axios.get(`http://localhost:5000/api/users/find/${currentUserId}`);
+        setUser(res.data);
+      } catch(err){
+          console.log(err)
+      }
+    };
+    getUser();
+  }, [currentUserId,user]);
+  let phoneNumber = user.telephone; // Sample phone number with leading zero
+
+    // Convert the phone number to a string and remove the leading zero
+    phoneNumber = Number(phoneNumber).toString();
+
+    const getRole = () => {
+        if (user.isAdmin) return "Admin";
+        if (user.isSupervisor) return "Supervisor";
+        if (user.isSupervisorShoop) return "Supervisor Shop";
+        if (user.isPompist) return "Pompist";
+        return "Client";
+    };
 
   return (
     <div className='SettingUI'>
@@ -33,14 +82,14 @@ const SettingUI = () => {
                         <img src={AdminIcon} alt='AdminIcon'/>
                     </div>
                     <div className='IdentityCredentils'>
-                        <span className='span2'>Admin</span>
-                        <span className='span1'>F. Ben Jaddi</span>
+                        <span className='span2'>{getRole()}</span>
+                        <span className='span1'>{user.nomComplet}</span>
                         
                         <span className='span3'>Laayoune, MA</span>
                     </div> 
                 </div>
                 <div className='editBtnProfilInfo'>
-                    <button>
+                    <button onClick={handelClickUpdateUser}>
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2">
                             <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path>
                         </svg>
@@ -54,7 +103,7 @@ const SettingUI = () => {
                         <h3>Personal Information</h3>
                     </div>
                     <div className='editBtnProfilInfo'>
-                        <button>
+                        <button onClick={handelClickUpdateUser}>
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2">
                                 <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path>
                             </svg>
@@ -66,25 +115,25 @@ const SettingUI = () => {
                     <div className='prInfoClm1'>
                         <div className='prInfoClm1Rw1'>
                             <span>Full Name</span>
-                            <span>F. Ben Jaddi</span>
+                            <span>{user.nomComplet}</span>
                             </div>
                         <div className='prInfoClm1Rw2'>
                             <span>Email Address</span>
-                            <span>f.benjaddi@gmail.com</span>
+                            <span>{user.email}</span>
                         </div>
                         <div className='prInfoClm1Rw3'>
                             <span>Bio</span>
-                            <span>Admin</span>
+                            <span>{getRole()}</span>
                         </div>
                     </div>
                     <div className='prInfoClm2'>
                         <div className='prInfoClm2Rw1'>
                             <span>Telephone</span>
-                            <span>(+212)6 15 20 83 08</span>
+                            <span>(+212){phoneNumber}</span>
                         </div>
                         <div className='prInfoClm2Rw2'>
                             <span>Cin</span>
-                            <span>SH564730</span>
+                            <span>{user.cin}</span>
                         </div>
                     </div>
                 </div>
@@ -144,12 +193,13 @@ const SettingUI = () => {
                 </div>
                 <div className='divDelRw3'>
                     <button onClick={handelClickCloseIcon}>No, cancel</button>
-                    <button>Yes, delete</button>
+                    <button onClick={handleDelete}>Yes, delete</button>
                 </div>
             </motion.div>
         </div>
         </>
         }
+        {updateUser && <><UpdateUser handleClose={handelClickCloseIcon} userId={user._id}/></>}
     </div>
   )
 }
