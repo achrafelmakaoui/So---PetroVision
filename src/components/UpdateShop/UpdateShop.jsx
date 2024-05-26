@@ -35,7 +35,8 @@ const UpdateShop = ({handleClose, shopId}) => {
                 station,
                 shoop,
                 typeShoop,
-                pointShoop
+                pointShoop,
+                imgRecip:shop.imgRecip,
             };
     
             const response = await axios.put(`http://localhost:5000/api/shoop/${shop._id}`, updatedShopData);
@@ -92,6 +93,12 @@ const UpdateShop = ({handleClose, shopId}) => {
                                             <div className='InputsClm1'>
                                                 <label>pointShoop</label>
                                                 <input type='number' placeholder={shop.pointShoop} value={pointShoop} onChange={(e) => setPointShoop(e.target.value)} required/>
+                                            </div>
+                                        </div>
+                                        <div className='addClientInputs'>
+                                            <div className='InputsClm1'>
+                                                <label>Image-Recip</label>
+                                                <input type='text' placeholder={shop.imgRecip} value={shop.imgRecip} disabled required/>
                                             </div>
                                         </div>
                                     </div>

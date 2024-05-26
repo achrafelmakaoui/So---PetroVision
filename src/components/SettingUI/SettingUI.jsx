@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import './SettingUI.css'
 import AdminIcon from '../Assets/AdminIcon.png'
+import TaxIcon from '../Assets/txd3d.png'
+import PompistIcon from '../Assets/Pompist3d.png'
+import SupIcon from '../Assets/sup3d.png'
+import SupShopIcon from '../Assets/supShop3d.png'
+
 import { motion } from "framer-motion"
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios'
@@ -79,7 +84,11 @@ const SettingUI = () => {
             <div className='firstBannerProfilInfo'>
                 <div className='prInfoIdentity'>
                     <div className='IdentityImg'>
-                        <img src={AdminIcon} alt='AdminIcon'/>
+                        {user.isAdmin && <img src={AdminIcon} alt='AdminIcon'/>}
+                        {user.isSupervisor && <img src={SupIcon} alt='SupervisorIcon'/>}
+                        {user.isSupervisorShoop && <img src={SupShopIcon} alt='SupervisorShopIcon'/>}
+                        {user.isPompist && <img src={PompistIcon} alt='PompistIcon'/>}
+                        {!user.isPompist && !user.isAdmin && !user.isSupervisor && !user.isSupervisorShoop && <img src={TaxIcon} alt='ClientIcon'/>}
                     </div>
                     <div className='IdentityCredentils'>
                         <span className='span2'>{getRole()}</span>

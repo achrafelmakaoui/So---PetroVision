@@ -66,9 +66,57 @@
     border-radius: 50%;
     cursor: pointer;
 }
+.PompistHeaderPhone{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+    width: 100%;
+}
+.pompistheaderimages{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+.sopImg img{
+    width: 40px;
+    height: 50px;
+}
+.shellImg img{
+    width: 50px;
+    height: 50px;
+}
+.navSoPompistMobile{
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 20px;
+}
+.addTransaction-Pomp{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 6rem;
+    height: 3rem;
+    background-color: #0cbe0fdc;
+    border-radius: 50px;
+    cursor: pointer;
+}
+.logoutAccountPompist{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 3rem;
+    height: 3rem;
+    background-color: #f03228;
+    border-radius: 50%;
+    cursor: pointer;
+}
 .cardsDsPompist{
     display: flex;
     flex-wrap: wrap;
+    width: 100%;
     gap: 20px;
 }
 .cardDesignPompist{
@@ -114,6 +162,7 @@
     padding-top: 0.5em;
     border-left: 1px solid #b3b3b3;
     border-right: 1px solid #b3b3b3;
+    border-bottom: 1px solid #b3b3b3;
     
 }
 .cardPompistIdentity h5{
@@ -187,7 +236,7 @@
     align-items: center;
     border-left: 1px solid #b3b3b3;
     border-right: 1px solid #b3b3b3;
-    border-top: 1px solid #b3b3b3;
+    /* border-top: 1px solid #b3b3b3; */
     border-bottom: 1px solid #b3b3b3;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
@@ -294,3 +343,47 @@ svg:hover{
     border: 1px solid #ff5900;
 }
 
+
+
+@media screen and (max-width: 1321px){
+    .cardsDsPompist{
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+        gap: 20px;
+    }
+    .cardDesignPompist{
+        width: calc(33.33% - 20px);
+        height: fit-content;
+        background-color: white;
+        margin-bottom: 0.85rem;
+    }
+}
+@media screen and (max-width: 1055px){
+    .cardsDsPompist{
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+        gap: 20px;
+    }
+    .cardDesignPompist{
+        width: calc(50% - 20px);
+        height: fit-content;
+        background-color: white;
+        margin-bottom: 0.85rem;
+    }
+}
+@media screen and (max-width: 812px){
+    .cardsDsPompist{
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+        row-gap: 20px;
+    }
+    .cardDesignPompist{
+        width: calc(100%);
+        height: fit-content;
+        background-color: white;
+        margin-bottom: 0.85rem;
+    }
+}

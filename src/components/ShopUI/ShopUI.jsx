@@ -7,6 +7,8 @@ import FtourIcon from '../Assets/breakfast.png'
 import OiIcon from '../Assets/oilicon3d.png'
 import axios from 'axios'
 import UpdateShop from '../UpdateShop/UpdateShop'
+import NewShop from '../newShop/NewShop'
+import RecipShoop from '../RecipShop/RecipShoop'
 
 const ShopUI = () => {
     const [shops, setShops] = useState([]);
@@ -19,6 +21,8 @@ const ShopUI = () => {
     const [shoopId, setShoopId] = useState();
     const [updateShoop, setUpdateShoop] = useState(false);
     const [searchMode, setSearchMode] = useState(false);
+    const [newShop, setNewShop] = useState(false);
+    const [recipShop, setRecipShop] = useState(false);
 
     const formatDate = (dateString) => {
         const options = { month: 'long', day: 'numeric', year: 'numeric' };
@@ -80,8 +84,14 @@ const ShopUI = () => {
         setUpdateShoop(true);
         setShoopId(ShoopId)
     }
+    const handelClickRecipShop = (shopId) => {
+        setShoopId(shopId);
+        setRecipShop(true);
+    }
     const handelClickCloseIcon = () => {
+        setNewShop(false);
         setUpdateShoop(false);
+        setRecipShop(false);
     };
     const handleSearchFocus = () => {
         setSearchMode(true);
@@ -96,7 +106,9 @@ const ShopUI = () => {
         setSearchMode(false);
         setSearchQuery('');
     };
-
+    const handelClickNewShop = () => {
+        setNewShop(true);
+    };
   return (
     <div className='ShopUI'>
         <div className='headershopIcons'>
@@ -110,7 +122,7 @@ const ShopUI = () => {
                     <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
                 </svg>
             </div>
-            <div className='shopBag'>
+            <div className='shopBag' onClick={handelClickNewShop}>
                 <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus">
                     <line x1="12" y1="5" x2="12" y2="19"></line>
                     <line x1="5" y1="12" x2="19" y2="12"></line>
@@ -216,7 +228,7 @@ const ShopUI = () => {
                                             <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
                                         </svg>
                                     </div>
-                                    <div className='ActionMoreInfoIcon'>
+                                    <div className='ActionMoreInfoIcon' onClick={()=> handelClickRecipShop(shop._id)}>
                                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-info">
                                             <circle cx="12" cy="12" r="10"></circle>
                                             <line x1="12" y1="16" x2="12" y2="12"></line>
@@ -270,7 +282,9 @@ const ShopUI = () => {
                 </table>
             </div>
         </div>
+        {newShop && <><NewShop handleClose={handelClickCloseIcon}/></>}
         {updateShoop && <UpdateShop handleClose={handelClickCloseIcon} shopId={shoopId}/>}
+        {recipShop && <RecipShoop handleClose={handelClickCloseIcon} shopId={shoopId} />}
     </div>
   )
 }

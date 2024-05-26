@@ -11,7 +11,6 @@ function QRscanner({handleClose}) {
     const [ca, setCa] = useState('');
     const [qte, setQte] = useState('');
     const [produitAcheter, setProduitAcheter] = useState('');
-    const [points, setPoints] = useState();
     const [photo, setPhoto] = useState(null);
 
     useEffect(() => {
@@ -40,7 +39,6 @@ function QRscanner({handleClose}) {
         data.append('ca', ca);
         data.append('qte', qte);
         data.append('produitAcheter', produitAcheter);
-        data.append('points', points);
         if (photo) {
             data.append('photo', photo);
         }
@@ -54,7 +52,7 @@ function QRscanner({handleClose}) {
             if (response.ok) {
                 const result = await response.json();
                 console.log('Transaction created:', result);
-                handleClose()
+                handleClose();
             } else {
                 const errorText = await response.text();
                 console.error('Error creating transaction:', errorText);
@@ -176,17 +174,6 @@ function QRscanner({handleClose}) {
                                         </div>
                                     </div>
                                     <div className='addTransactionInputs'>
-                                        <div className='InputsClm1'>
-                                            <label>Points</label>
-                                            <input
-                                                type='number'
-                                                name='points'
-                                                placeholder='Enter Points'
-                                                value={points}
-                                                onChange={(e) => setPoints(parseInt(e.target.value))}
-                                                required
-                                            />
-                                        </div>
                                         <div className='InputsClm1'>
                                             <label htmlFor="photo">Image-Counter:</label>
                                             <input

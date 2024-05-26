@@ -94,7 +94,12 @@ const UpdateTransaction = ({handleClose, transactionId}) => {
                                             </div>
                                             <div className='InputsClm1'>
                                                 <label>produitAcheter</label>
-                                                <input type='text' placeholder={transaction.produitAcheter} value={produitAcheter} onChange={(e) => setProduitAcheter(e.target.value)} required/>
+                                                <select value={produitAcheter} onChange={(e) => setProduitAcheter(e.target.value)} required>
+                                                    <option value='Essence'>Essence</option>
+                                                    <option value='Diesel'>Diesel</option>
+                                                    <option value='Essence V POWER'>Essence V POWER</option>
+                                                    <option value='Diesel V POWER'>Diesel V POWER</option>
+                                                </select>
                                             </div>
                                         </div>
                                         <div className='addClientInputs'>
@@ -104,7 +109,11 @@ const UpdateTransaction = ({handleClose, transactionId}) => {
                                             </div>
                                             <div className='InputsClm1'>
                                                 <label>Status</label>
-                                                <input type='text' placeholder={transaction.status} value={status} onChange={(e) => setStatus(e.target.value)} required/>
+                                                <select value={status} onChange={(e) => setStatus(e.target.value)} required>
+                                                    <option value='Encours'>Encours</option>
+                                                    <option value='Fraud'>Fraud</option>
+                                                    <option value='Verified'>Verified</option>
+                                                </select>
                                             </div>
                                         </div>
                                     </div>
