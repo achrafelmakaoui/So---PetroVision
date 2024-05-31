@@ -7,6 +7,7 @@ import axios from 'axios'
 import UpdateTransaction from '../UpdateTransaction/UpdateTransaction'
 import QrCodeScanner from '../QrCodeScanner/QrCodeScanner'
 import ImgTransaction from '../ImgTransaction/ImgTransaction'
+import { useSelector } from 'react-redux';
 
 const TransactionUI = () => {
     const [transactions, setTransactions] = useState([]);
@@ -15,12 +16,17 @@ const TransactionUI = () => {
     const [jour, setJour] = useState();
     const [station, setStation] = useState('');
     const [status, setStatus] = useState('');
-    const [numeroBon, setNumeroBon] = useState();
+    const [ncarnet, setncarnet] = useState();
     const [transactionId, setTransactionId] = useState();
     const [updateTransaction, setUpdateTransaction] = useState(false);
     const [newTransaction, setNewTransaction] = useState(false);
     const [imgTransaction, setImgTransaction] = useState(false);
     const [searchMode, setSearchMode] = useState(false);
+
+
+    const currentUser = useSelector((state) => state.user.currentUser);
+    const isSupervisor = currentUser?.isSupervisor;
+    const isPompist = currentUser?.isPompist;
 
     const formatDate = (dateString) => {
         const options = { month: 'long', day: 'numeric', year: 'numeric' };
@@ -40,8 +46,10 @@ const TransactionUI = () => {
     useEffect(() => {
         const getTransactions = async () => {
             let url;
-            if (searchMode && searchQuery) {
+            if (!isSupervisor && searchMode && searchQuery) {
                 url = `http://localhost:5000/api/transaction/search?name=${searchQuery}`;
+            } else if (isSupervisor && searchMode && searchQuery) {
+                url = `http://localhost:5000/api/transaction/search?name=${searchQuery}&station=${currentUser.stationActuel}`;
             } else {
                 url = "http://localhost:5000/api/transaction/multiFilter?";
                 const queryParams = [];
@@ -54,11 +62,14 @@ const TransactionUI = () => {
                     queryParams.push(`jour=${jour}`);
                 }
                 
+                if (isSupervisor) {
+                    queryParams.push(`station=${currentUser.stationActuel}`);
+                }
                 if (station) {
                     queryParams.push(`station=${station}`);
                 }
-                if (numeroBon) {
-                    queryParams.push(`numeroBon=${numeroBon}`);
+                if (ncarnet) {
+                    queryParams.push(`ncarnet=${ncarnet}`);
                 }
                 if (status) {
                     queryParams.push(`status=${status}`);
@@ -76,7 +87,7 @@ const TransactionUI = () => {
             }
         };
         getTransactions();
-    }, [searchQuery,mois,jour,station,numeroBon,status,searchMode]);
+    }, [searchQuery,mois,jour,station,ncarnet,status,searchMode]);
 
     const handelClickUpdateTransaction = (TransactionId) => {
         setUpdateTransaction(true);
@@ -96,7 +107,7 @@ const TransactionUI = () => {
     };
     const handleSearchFocus = () => {
         setSearchMode(true);
-        setNumeroBon(false);
+        setncarnet('');
         setMois(false);
         setJour(false);
         setStatus('');
@@ -131,7 +142,7 @@ const TransactionUI = () => {
             <div className='filterTransactions'>
                 <div className="search-transaction">
                     <div className='serachByNumeroBon'>
-                        <input type='number' placeholder="Filter By N° bon..." min={0} value={numeroBon} onChange={(e) => setNumeroBon(e.target.value)}/>
+                        <input type='text' placeholder="Filter By N° ncarnet.." value={ncarnet} onChange={(e) => setncarnet(e.target.value)}/>
                     </div>
                 </div>
                 <div className='transactionFilterMois'>
@@ -162,21 +173,24 @@ const TransactionUI = () => {
                         </select>
                     </div>
                 </div>
-                <div className='transactionFilterStatus'>
-                    <div className='transactionFilterStatusSel'>
-                       <select name="status" value={status} onChange={(e) => setStatus(e.target.value)}>
-                            <option>
-                                Filter By Status
-                            </option>
-                            <option value='Encours'>Encours</option>
-                            <option value='Fraud'>Fraud</option>
-                            <option value='Verified'>Verified</option>
-                        </select>
+                {!isSupervisor &&
+                    <div className='transactionFilterStatus'>
+                        <div className='transactionFilterStatusSel'>
+                        <select name="status" value={status} onChange={(e) => setStatus(e.target.value)}>
+                                <option>
+                                    Filter By Status
+                                </option>
+                                <option value='Encours'>Encours</option>
+                                <option value='Fraud'>Fraud</option>
+                                <option value='Verified'>Verified</option>
+                            </select>
+                        </div>
                     </div>
-                </div>
+                }
                 <div className='transactionFilterStation'>
                     <div className='transactionFilterStationInp'>
-                       <input type='text' placeholder='Filter By Station' value={station} onChange={(e) => setStation(e.target.value)}/> 
+                       {isSupervisor ? <input type='text' name='station' placeholder='Filter By Station' value={currentUser.stationActuel} disabled/> : <input type='text' name='station' placeholder='Filter By Station' value={station} onChange={(e) => setStation(e.target.value)}/>}
+                       {/* <input type='text' placeholder='Filter By Station' value={station} onChange={(e) => setStation(e.target.value)}/>  */}
                     </div>
                 </div>
             </div>
@@ -190,7 +204,7 @@ const TransactionUI = () => {
                         <th>Quantity</th>
                         <th>Produit</th>
                         <th>Points</th>
-                        <th>Status</th>
+                        {!isSupervisor && <th>Status</th> }
                         <th>Actions</th>
                     </tr>
                     {transactions.map((transaction,index) => (
@@ -210,6 +224,7 @@ const TransactionUI = () => {
                             <td><span>{transaction.qte}L</span></td>
                             <td><span>{transaction.produitAcheter}</span></td>
                             <td><span>{transaction.points}</span></td>
+                            {!isSupervisor &&
                                 <td>
                                     {(() => {
                                         let className, svgContent;
@@ -258,7 +273,8 @@ const TransactionUI = () => {
                                             </div>
                                         );
                                     })()}
-                            </td>
+                                </td>
+                            }
                             <td>
                                 <div className='ActionsInfo'>
                                     <div className='ActionDelIcon' onClick={()=> deleteTransaction(transaction._id)}>

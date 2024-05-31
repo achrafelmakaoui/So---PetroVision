@@ -33,7 +33,7 @@ function NewShop({handleClose}) {
         e.preventDefault();
 
         const data = new FormData();
-        data.append('numeroBon', qrscan);
+        data.append('ncarnet', qrscan);
         data.append('nomComplet', client.nomComplet);
         data.append('station', station);
         data.append('typeShoop', typeShoop);
@@ -99,11 +99,11 @@ function NewShop({handleClose}) {
                                 <div className='addClientBannerForm'>
                                     <div className='addClientInputs'>
                                         <div className='InputsClm1'>
-                                            <label>Numero de Bon</label>
+                                            <label>N° carnet</label>
                                             <input
                                                 type='number'
-                                                name='numeroBon'
-                                                placeholder='Entrer Numero de Bon'
+                                                name='ncarnet'
+                                                placeholder='Entrer N° carnet'
                                                 value={qrscan}
                                                 required
                                                 disabled

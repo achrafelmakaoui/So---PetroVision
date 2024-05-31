@@ -16,6 +16,7 @@ import SettingUI from './components/SettingUI/SettingUI';
 import NewShop from './components/newShop/NewShop';
 import { useSelector } from 'react-redux';
 import AddTransactionPompist from './components/AddTransactionPompist/AddTransactionPompist';
+import AddShopSuperviseurShop from './components/AddShopSuperviseurShop/AddShopSuperviseurShop';
 
 function App() {
   // const [introComplete, setIntroComplete] = useState(false);
@@ -40,8 +41,9 @@ function App() {
 
   return (
     <div className="App">
-      {/* {currentUser  && <Sideber/>} */}
-      {!isPompist && <Sideber/>}
+      {currentUser && <Sideber/>}
+      {/* {!isPompist && <Sideber/>} */}
+      {/* {!isSupervisorShop && <Sideber/>} */}
       <Routes>
         {isAdmin ? 
           (
@@ -62,8 +64,23 @@ function App() {
           : currentUser ?
           (
             <>
-              {isSupervisor && <Route path="/" element={<SuperviseurUI />} />}
-              {isSupervisorShop && <Route path="/" element={<SuperviseurShopUI />} />}
+              {isSupervisor && 
+                <>
+                  <Route path="/" element={<SuperviseurUI />} />
+                  <Route path="/transaction" element={<><TransactionUI/></>}/>
+                  <Route path="/Setting" element={<><SettingUI/></>}/>
+                  <Route path="/pompist" element={<><PompistUI/></>}/>
+                  <Route path="/client" element={<><ClientUI/></>}/>
+                </>
+              }
+              {isSupervisorShop && 
+                <>
+                  <Route path="/" element={<SuperviseurShopUI />} />
+                  <Route path="/Setting" element={<><SettingUI/></>}/>
+                  <Route path="/Addshop" element={<><AddShopSuperviseurShop/></>}/>
+                  <Route path="/shop" element={<><ShopUI/></>}/>
+                </>
+              }
               {isPompist && 
                 <>
                   <Route path="/" element={<PompistUI />}/>

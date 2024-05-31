@@ -6,6 +6,7 @@ import SupIcon from '../Assets/sup3d.png'
 import axios from "axios";
 import NewSuperviseur from '../newSuperviseur/NewSuperviseur'
 import UpdateSuperviseur from '../updateSuperviseur/UpdateSuperviseur'
+import { useSelector } from 'react-redux';
 
 const SupervisuerUI = () => {
     const [supervisor, setSupervisor] = useState([]);
@@ -15,6 +16,9 @@ const SupervisuerUI = () => {
     const [newSuperviseur, setnewSuperviseur] = useState(false);
     const [UpdSuperviseur, setUpdSuperviseur] = useState(false);
     const [superviseurId, setSuperviseurId] = useState();
+
+    const currentUser = useSelector((state) => state.user.currentUser);
+    const isSupervisor = currentUser?.isSupervisor;
 
     const handleNameChange = (event) => {
         setName(event.target.value);
@@ -82,14 +86,16 @@ const SupervisuerUI = () => {
                     <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
                 </svg>
             </div>
-            <div className='addSupIcon-sup' onClick={handelClickNewSuperviseur}>
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user-plus">
-                    <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-                    <circle cx="8.5" cy="7" r="4"></circle>
-                    <line x1="20" y1="8" x2="20" y2="14"></line>
-                    <line x1="23" y1="11" x2="17" y2="11"></line>
-                </svg>
-            </div>
+            {!isSupervisor && 
+                <div className='addSupIcon-sup' onClick={handelClickNewSuperviseur}>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user-plus">
+                        <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="8.5" cy="7" r="4"></circle>
+                        <line x1="20" y1="8" x2="20" y2="14"></line>
+                        <line x1="23" y1="11" x2="17" y2="11"></line>
+                    </svg>
+                </div>
+            }
         </div>
         <div className='filterSup'>
             <div className='titleFilter-sup'>
@@ -131,22 +137,24 @@ const SupervisuerUI = () => {
                         <h3>{supervisor.nomComplet}</h3>
                         <h4>Superviseur</h4>
                     </div>
-                    <div className='cardSupDelUpd'>
-                        <div className='cardSupUpd'>
-                            <svg onClick={() => handelClickUpdSupervisor(supervisor._id)} width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#b3b3b3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-3">
-                                <path d="M12 20h9"></path>
-                                <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
-                            </svg>
+                    {!isSupervisor &&
+                        <div className='cardSupDelUpd'>
+                            <div className='cardSupUpd'>
+                                <svg onClick={() => handelClickUpdSupervisor(supervisor._id)} width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#b3b3b3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-3">
+                                    <path d="M12 20h9"></path>
+                                    <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+                                </svg>
+                            </div>
+                            <div className='cardSupDel'>
+                                <svg onClick={() => deleteSupervisor(supervisor._id)} width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#b3b3b3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2">
+                                    <polyline points="3 6 5 6 21 6"></polyline>
+                                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                                    <line x1="10" y1="11" x2="10" y2="17"></line>
+                                    <line x1="14" y1="11" x2="14" y2="17"></line>
+                                </svg>
+                            </div>
                         </div>
-                        <div className='cardSupDel'>
-                            <svg onClick={() => deleteSupervisor(supervisor._id)} width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#b3b3b3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2">
-                                <polyline points="3 6 5 6 21 6"></polyline>
-                                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
-                                <line x1="10" y1="11" x2="10" y2="17"></line>
-                                <line x1="14" y1="11" x2="14" y2="17"></line>
-                            </svg>
-                        </div>
-                    </div>
+                    }
                 </div>
                 </>
             ))}

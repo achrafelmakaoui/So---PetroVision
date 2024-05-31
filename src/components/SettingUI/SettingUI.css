@@ -355,3 +355,22 @@
   cursor: pointer;
 
 }
+
+
+@media screen and (max-width: 915px){
+  .prInfoRW2{
+    width: 100%;
+    display: flex;
+    align-items: start;
+  }
+  .prInfoClm1{
+    display: grid;
+    gap: 15px;
+    width: 50%;
+  }
+  .prInfoClm2{
+    display: grid;
+    gap: 15px;
+    width: 50%;
+  }
+}

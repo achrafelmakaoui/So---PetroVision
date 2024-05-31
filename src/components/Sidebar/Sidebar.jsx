@@ -4,13 +4,26 @@ import Sopetrole from '../Assets/sopetrole12.png';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { logout } from '../redux/userRedux';
+import { useSelector } from 'react-redux';
 
 const Sidebar = () => {
-    const dispatch = useDispatch();
+
+  const currentUser = useSelector((state) => state.user.currentUser);
+  const isSupervisor = currentUser?.isSupervisor;
+
+  const getRole = () => {
+    if (currentUser.isAdmin) return "Admin";
+    if (currentUser.isSupervisor) return "Supervisor";
+    if (currentUser.isSupervisorShoop) return "Supervisor Shop";
+    if (currentUser.isPompist) return "Pompist";
+    return "Client";
+  };
+
+  const dispatch = useDispatch();
    
-    const handleLogoutClick = () => {
-      dispatch(logout());
-    };
+  const handleLogoutClick = () => {
+    dispatch(logout());
+  };
   return (
       <div className="sidebar">
         <div class="head">
@@ -18,22 +31,24 @@ const Sidebar = () => {
             <img src={Sopetrole} alt="" />
           </div>
           <div class="user-details">
-            <p class="title">Administration</p>
-            <p class="name">F. Ben Jaddi</p>
+            <p class="title">{getRole()}</p>
+            <p class="name">{currentUser.nomComplet}</p>
           </div>
         </div>
         <div class="nav">
           <div class="menu">
             <ul>
-              <li>
-                <Link to="/">
-                  <svg  width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home">
-                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-                    <polyline points="9 22 9 12 15 12 15 22"></polyline>
-                  </svg>
-                  <span class="text">Dashboard</span>
-                </Link>
-              </li>
+              {!isSupervisor &&
+                <li>
+                  <Link to="/">
+                    <svg  width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home">
+                      <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                      <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                    </svg>
+                    <span class="text">Dashboard</span>
+                  </Link>
+                </li>
+              }
               <li>
                 <Link to="/Client">
                   <svg  width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users">
@@ -53,16 +68,18 @@ const Sidebar = () => {
                   <span class="text">Superviseur</span>
                 </Link>
               </li>
-              <li>
-                <Link to="/SuperviseurShop">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-cart">
-                    <circle cx="9" cy="21" r="1"></circle>
-                    <circle cx="20" cy="21" r="1"></circle>
-                    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
-                  </svg>
-                  <span class="text">Superviseur Shop</span>
-                </Link>
-              </li>
+              {!isSupervisor &&
+                <li>
+                  <Link to="/SuperviseurShop">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-cart">
+                      <circle cx="9" cy="21" r="1"></circle>
+                      <circle cx="20" cy="21" r="1"></circle>
+                      <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                    </svg>
+                    <span class="text">Superviseur Shop</span>
+                  </Link>
+                </li>
+              }
               <li>
                 <Link to="/Pompist">
                 <svg fill="currentColor" height="16" width="16" version="1.1" id="Layer_1" viewBox="0 0 485 485">
@@ -96,7 +113,7 @@ const Sidebar = () => {
                     </g>
                   </g>
                   </svg>
-                  <span class="text">Pompist</span>
+                  <span class="text">Pompiste</span>
                 </Link>
               </li>
               <li>
@@ -108,15 +125,17 @@ const Sidebar = () => {
                   <span class="text">Transaction</span>
                 </Link>
               </li>
-              <li>
-                <Link to="/Shop">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-bag"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
-                    <line x1="3" y1="6" x2="21" y2="6"></line>
-                    <path d="M16 10a4 4 0 0 1-8 0"></path>
-                  </svg>
-                  <span class="text">Shop</span>
-                </Link>
-              </li>
+              {!isSupervisor &&
+                <li>
+                  <Link to="/Shop">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-bag"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                      <line x1="3" y1="6" x2="21" y2="6"></line>
+                      <path d="M16 10a4 4 0 0 1-8 0"></path>
+                    </svg>
+                    <span class="text">Shop</span>
+                  </Link>
+                </li>
+              }
             </ul>
           </div>
           <div class="menu">

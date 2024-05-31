@@ -7,6 +7,7 @@ import MoreInfoClient from '../MoreInfoClient/MoreInfoClient'
 import axios from "axios";
 import NewClient from '../newClient/NewClient'
 import UpdateClient from '../updateClient/UpdateClient'
+import { useSelector } from 'react-redux';
 
 const ClientUI = () => {
     const [filterPoints, setFilterPoints] = useState(1);
@@ -20,6 +21,9 @@ const ClientUI = () => {
     const [newClient, setnewClient] = useState(false);
     const [updClient, setupdClient] = useState(false);
     const [searchMode, setSearchMode] = useState(false);
+
+    const currentUser = useSelector((state) => state.user.currentUser);
+    const isSupervisor = currentUser?.isSupervisor;
 
     const handleCheckboxChange = (checkboxNumber) => {
         if (checkboxNumber === 1) {
@@ -84,14 +88,19 @@ const ClientUI = () => {
     useEffect(() => {
         const getClients = async () => {
             let url;
-            if (searchMode && name) {
-                url = `http://localhost:5000/api/clients/search?name=${name}`;
+            if (!isSupervisor && searchMode && name) {
+                url = `http://localhost:5000/api/sopclients/search?name=${name}`;
+            } else if (isSupervisor && searchMode && name){
+                url = `http://localhost:5000/api/sopclients/search?name=${name}&stationInscription=${currentUser.stationActuel}`;
             } else {
-                url = "http://localhost:5000/api/clients/multiFilter?";
+                url = "http://localhost:5000/api/sopclients/multiFilter?";
                 if (isChecked1) {
                     url += "proprietaire=oui&";
                 } else if (isChecked2) {
                     url += "proprietaire=non&";
+                }
+                if (isSupervisor && currentUser.stationActuel) {
+                    url += `stationInscription=${currentUser.stationActuel}&`;
                 }
                 if (filterPoints !== 1) {
                     url += `totalPoints=${filterPoints}&`;
@@ -109,11 +118,11 @@ const ClientUI = () => {
             }
         };
         getClients();
-    }, [name, isChecked1, isChecked2, filterPoints, filterVisites, searchMode]);
+    }, [name, isChecked1, isChecked2, filterPoints, filterVisites, searchMode, isSupervisor, currentUser.stationActuel]);
 
     const deleteClient = async (id) => {
         try {
-          const res = await axios.delete(`http://localhost:5000/api/clients/${id}`);
+          const res = await axios.delete(`http://localhost:5000/api/sopclients/${id}`);
           console.log(res)
         } catch(err){
             console.log(err)

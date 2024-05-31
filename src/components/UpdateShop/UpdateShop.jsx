@@ -30,7 +30,7 @@ const UpdateShop = ({handleClose, shopId}) => {
             const updatedShopData = {
                 // Assuming you have all the required form fields in state variables
                 // Replace these with your actual state variables
-                numeroBon: shop.numeroBon,
+                ncarnet: shop.ncarnet,
                 nomComplet:shop.nomComplet,
                 station,
                 shoop,
@@ -67,8 +67,8 @@ const UpdateShop = ({handleClose, shopId}) => {
                                     <div className='addClientBannerForm'>
                                         <div className='addClientInputs'>
                                             <div className='InputsClm1'>
-                                                <label>Numero de Bon</label>
-                                                <input type='number' placeholder={shop.numeroBon} value={shop.numeroBon} disabled/>
+                                                <label>N° carnet</label>
+                                                <input type='number' placeholder={shop.ncarnet} value={shop.ncarnet} disabled/>
                                             </div>
                                             <div className='InputsClm1'>
                                                 <label>Nom Complet</label>

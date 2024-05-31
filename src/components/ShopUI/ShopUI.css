@@ -294,3 +294,149 @@
   border-radius: 5px;
   cursor: pointer;
 }
+
+@media(max-width: 1189px) {
+  .filtershop{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    row-gap: 20px;
+    column-gap: none;
+
+  }
+  .search-shop{
+    padding-left: 1rem;
+    padding-right: 1rem;
+    width: 100%;
+  }
+  .shopFilterMois{
+    padding-left: 1rem;
+    padding-right: 1rem;
+    width: 100%;
+  }
+  .shopFilterJour{
+    padding-left: 1rem;
+    padding-right: 1rem;
+    width: 100%;
+  }
+  .shopFilterStatus{
+    padding-left: 1rem;
+    padding-right: 1rem;
+    width: 100%;
+  }
+  .shopFilterStation{
+    padding-left: 1rem;
+    padding-right: 1rem;
+    width: 100%;
+  }
+  .search-shop input{
+    width: 100%;
+  }
+  table thead{
+      display: none;
+  }
+  table, table tbody, table tr, table td{
+    display: block;
+    width: 100%;
+  }
+  table .trBodyTd{
+    padding-right: 1rem;
+  }
+  table tr{
+    margin-bottom: 10px;
+  }
+  table td{
+    text-align: right;
+    padding-left: 50%;
+    text-align: right;
+    position: relative;
+    border-bottom: 1px solid #b3b3b3;
+    /* gap: 10px; */
+  }
+  table td:nth-last-child(1){
+    text-align: right;
+    padding-left: 50%;
+    text-align: right;
+    position: relative;
+    border-bottom: none;
+  }
+  table td::before{
+    content: attr(data-label);
+    position: absolute;
+    left: 0;
+    width: 50%;
+    padding-left: 15px;
+    font-size: 15px;
+    font-weight:bold ;
+    text-align: left;
+    
+  }
+  .shopOwner{
+    display: flex;
+    justify-content: flex-end;
+    /* align-items: center; */
+    width: 100%;
+    gap: 10px;
+  }
+  .shopOwner-Img{
+    width: 40px;
+    aspect-ratio: 3/2;
+    object-fit: cover;
+    background-color: rgba(69, 168, 255, 0.663);
+    border-radius: 5px;
+  }
+  .shopOwner-Name{
+    font-family: Poppins,sans-serif;
+    font-size: 16px;
+    color: #0b0b0b;
+    font-weight: 500;
+    padding: 0;
+  }
+  .shopOwner-Job{
+    text-align: start;
+    font-family: Poppins,sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: #29345C;
+    padding: 0;
+  }
+  .ActionsInfo{
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+  }
+  .ActionDelIcon{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 1.9rem;
+      height: 1.9rem;
+      background-color: #ff0800d9;
+      border-radius: 5px;
+      cursor: pointer;
+  }
+  .ActionUpdIcon{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 1.9rem;
+      height: 1.9rem;
+      background-color: #0055ffd9;
+      border-radius: 5px;
+      cursor: pointer;
+  }
+  .ActionMoreInfoIcon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 1.9rem;
+    height: 1.9rem;
+    background-color: #00a2ffd9;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  .search .icon-search{
+    display: none;
+  }
+}

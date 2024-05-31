@@ -5,11 +5,10 @@ import axios from 'axios'
 
 const NewClient = ({handleClose}) => {
     const [selectedIcon, setSelectedIcon] = useState('keyboard');
-    const [numeroBon, setNumeroBon] = useState(0);
     const [nomComplet, setNomComplet] = useState('');
     const [telephone, setTelephone] = useState('');
-    const [cin, setCin] = useState('');
-    const [dateInscription, setDateInscription] = useState('');
+    const [ncarnet, setNcarnet] = useState();
+    const [typeTaxi, setTypeTaxi] = useState('');
     const [stationInscription, setStationInscription] = useState('');
     const [permisConfiance, setPermisConfiance] = useState(0);
     const [matricule, setMatricule] = useState('');
@@ -24,22 +23,21 @@ const NewClient = ({handleClose}) => {
         e.preventDefault();
         try {
             const formData = {
-                numeroBon,
                 nomComplet,
                 telephone,
-                cin,
-                dateInscription,
+                ncarnet,
                 stationInscription,
                 permisConfiance,
                 matricule,
                 numeroTaxi,
                 marqueVehicule,
+                typeTaxi,
                 proprietaire,
                 freqVisiteParMois,
                 moyenneCAVisite,
                 totalPoints,
             };
-            const response = await axios.post('http://localhost:5000/api/clients/', formData);
+            const response = await axios.post('http://localhost:5000/api/sopclients/', formData);
             console.log('Client added:', response.data);
             handleClose(); // Close the form after successful submission
         } catch (error) {
@@ -71,7 +69,7 @@ const NewClient = ({handleClose}) => {
     const formData = new FormData();
     formData.append("file", selectedFile, selectedFile.name);
     try {
-        const response = await fetch("http://localhost:5000/api/clients/upload", {
+        const response = await fetch("http://localhost:5000/api/sopclients/upload", {
         method: "POST",
         body: formData,
         });
@@ -122,28 +120,18 @@ const NewClient = ({handleClose}) => {
                                     <div className='addClientBannerForm'>
                                         <div className='addClientInputs'>
                                             <div className='InputsClm1'>
-                                                <label>Numero de Bon</label>
-                                                <input type='number' placeholder='Entrer numero de bon' value={numeroBon} onChange={(e) => setNumeroBon(parseInt(e.target.value))} min={0} required/>
-                                            </div>
-                                            <div className='InputsClm1'>
                                                 <label>Nom Complet</label>
                                                 <input type='text' placeholder='Entrer nom complet' value={nomComplet} onChange={(e) => setNomComplet(e.target.value)} required/>
                                             </div>
-                                        </div>
-                                        <div className='addClientInputs'>
                                             <div className='InputsClm1'>
                                                 <label>Telephone</label>
                                                 <input type='text' placeholder='Entrer telephone' value={telephone} onChange={(e) => setTelephone(e.target.value)} required/>
                                             </div>
-                                            <div className='InputsClm1'>
-                                                <label>Cin</label>
-                                                <input type='text' placeholder='Entrer cin' value={cin} onChange={(e) => setCin(e.target.value)} required/>
-                                            </div>
                                         </div>
                                         <div className='addClientInputs'>
                                             <div className='InputsClm1'>
-                                                <label>Date D'inscription</label>
-                                                <input type='date' placeholder="Entrer date d'inscription" value={dateInscription} onChange={(e) => setDateInscription(e.target.value)} required/>
+                                                <label>N° carnet</label>
+                                                <input type='number' placeholder='Entrer N° carnet' value={ncarnet} onChange={(e) => setNcarnet(e.target.value)} required/>
                                             </div>
                                             <div className='InputsClm1'>
                                                 <label>Station D'inscription</label>
@@ -171,6 +159,14 @@ const NewClient = ({handleClose}) => {
                                             </div>
                                         </div>
                                         <div className='addClientInputs'>
+                                            <div className='InputsClm1'>
+                                                <label>Type Taxi</label>
+                                                <select value={typeTaxi} onChange={(e) => setTypeTaxi(e.target.value)}>
+                                                    <option>Choisir type de taxi</option>
+                                                    <option value='Petit'>Petit</option>
+                                                    <option value='Grand'>Grand</option>
+                                                </select>
+                                            </div>
                                             <div className='InputsClm1Proprietaire'>
                                                 <label>Proprietaire</label>
                                                 <div className='filterClientPropBtn'>
@@ -184,16 +180,19 @@ const NewClient = ({handleClose}) => {
                                                     </div>
                                                 </div>
                                             </div>
+                                        </div>
+                                        <div className='addClientInputs'>
                                             <div className='InputsClm1'>
                                                 <label>Visite Par Mois</label>
                                                 <input type='number' value={freqVisiteParMois} onChange={(e) => setfreqVisiteParMois(parseInt(e.target.value))} required/>
                                             </div>
-                                        </div>
-                                        <div className='addClientInputs'>
                                             <div className='InputsClm1'>
                                                 <label>CA / Visite</label>
                                                 <input type='number' value={moyenneCAVisite} onChange={(e) => setmoyenneCAVisite(parseInt(e.target.value))} required/>
                                             </div>
+                                        </div>
+                                        <div className='addClientInputs'>
+                                            
                                             <div className='InputsClm1'>
                                                 <label>Total Points</label>
                                                 <input type='number' value={totalPoints} onChange={(e) => setTotalPoints(parseInt(e.target.value))} required/>

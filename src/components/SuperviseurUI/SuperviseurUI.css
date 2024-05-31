@@ -73,6 +73,7 @@
     height: fit-content;
     background-color: white;
     margin-bottom: 0.85rem;
+    border-bottom: 1px solid #b3b3b3;
 }
 .cardSuphead{
     display: flex;

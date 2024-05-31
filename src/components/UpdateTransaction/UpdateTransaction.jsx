@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import './UpdateTransaction.css'
 import { motion } from "framer-motion"
+import { useSelector } from 'react-redux';
 import axios from 'axios'
 
 const UpdateTransaction = ({handleClose, transactionId}) => {
@@ -11,7 +12,9 @@ const UpdateTransaction = ({handleClose, transactionId}) => {
     const [station, setStation] = useState('');
     const [status, setStatus] = useState('');
 
-    
+    const currentUser = useSelector((state) => state.user.currentUser);
+    const isAdmin = currentUser?.isAdmin;
+    const isSupervisor = currentUser?.isSupervisor;
 
     useEffect(() => {
         const getSuperviseur = async () => {
@@ -28,19 +31,31 @@ const UpdateTransaction = ({handleClose, transactionId}) => {
       const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const updatedSupervisorData = {
-                // Assuming you have all the required form fields in state variables
-                // Replace these with your actual state variables
-                numeroBon: transaction.numeroBon,
-                dataVisite: transaction.dataVisite,
-                station,
-                ca,
-                qte,
-                produitAcheter,
-                imgCounteur:transaction.imgCounteur,
-                status,
-            };
-    
+            let updatedSupervisorData;
+
+            if (isAdmin) {
+                updatedSupervisorData = {
+                    ncarnet: transaction.ncarnet,
+                    dataVisite: transaction.dataVisite,
+                    station,
+                    ca,
+                    qte,
+                    produitAcheter,
+                    imgCounteur:transaction.imgCounteur,
+                    status,
+                };
+            } else if (isSupervisor) {
+                updatedSupervisorData = {
+                    ncarnet: transaction.ncarnet,
+                    dataVisite: transaction.dataVisite,
+                    station,
+                    ca,
+                    qte,
+                    produitAcheter,
+                    imgCounteur:transaction.imgCounteur,
+                    status:transaction.status,
+                };
+            }
             const response = await axios.put(`http://localhost:5000/api/transaction/${transaction._id}`, updatedSupervisorData);
             console.log('Transaction updated:', response.data);
     
@@ -69,8 +84,8 @@ const UpdateTransaction = ({handleClose, transactionId}) => {
                                     <div className='addClientBannerForm'>
                                         <div className='addClientInputs'>
                                             <div className='InputsClm1'>
-                                                <label>Numero de Bon</label>
-                                                <input type='number' placeholder={transaction.numeroBon} value={transaction.numeroBon} disabled/>
+                                                <label>N° carnet</label>
+                                                <input type='text' placeholder={transaction.ncarnet} value={transaction.ncarnet} disabled/>
                                             </div>
                                             <div className='InputsClm1'>
                                                 <label>Nom Complet</label>
@@ -107,14 +122,16 @@ const UpdateTransaction = ({handleClose, transactionId}) => {
                                                 <label>Image-Counter</label>
                                                 <input type='text' placeholder={transaction.imgCounteur} value={transaction.imgCounteur} disabled required/>
                                             </div>
-                                            <div className='InputsClm1'>
-                                                <label>Status</label>
-                                                <select value={status} onChange={(e) => setStatus(e.target.value)} required>
-                                                    <option value='Encours'>Encours</option>
-                                                    <option value='Fraud'>Fraud</option>
-                                                    <option value='Verified'>Verified</option>
-                                                </select>
-                                            </div>
+                                            {!isSupervisor && 
+                                                <div className='InputsClm1'>
+                                                    <label>Status</label>
+                                                    <select value={status} onChange={(e) => setStatus(e.target.value)} required>
+                                                        <option value='Encours'>Encours</option>
+                                                        <option value='Fraud'>Fraud</option>
+                                                        <option value='Verified'>Verified</option>
+                                                    </select>
+                                                </div>
+                                            }
                                         </div>
                                     </div>
                                     <div className='btnSubmit'>

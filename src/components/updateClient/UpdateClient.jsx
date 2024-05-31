@@ -5,11 +5,10 @@ import axios from 'axios'
 
 const UpdateClient = ({handleClose, clientId}) => {
     const [client, setClient] = useState({});
-    const [numeroBon, setNumeroBon] = useState();
     const [nomComplet, setNomComplet] = useState('');
     const [telephone, setTelephone] = useState('');
-    const [cin, setCin] = useState('');
-    const [dateInscription, setDateInscription] = useState('');
+    const [typeTaxi, settypeTaxi] = useState('');
+    const [ncarnet, setncarnet] = useState();
     const [stationInscription, setStationInscription] = useState('');
     const [permisConfiance, setPermisConfiance] = useState();
     const [matricule, setMatricule] = useState('');
@@ -25,7 +24,7 @@ const UpdateClient = ({handleClose, clientId}) => {
     useEffect(() => {
         const getClient = async () => {
           try {
-            const res = await axios.get(`http://localhost:5000/api/clients/find/${clientId}`);
+            const res = await axios.get(`http://localhost:5000/api/sopclients/find/${clientId}`);
             setClient(res.data);
           } catch(err){
               console.log(err)
@@ -40,11 +39,9 @@ const UpdateClient = ({handleClose, clientId}) => {
             const updatedClientData = {
                 // Assuming you have all the required form fields in state variables
                 // Replace these with your actual state variables
-                numeroBon: numeroBon,
                 nomComplet: nomComplet,
                 telephone: telephone,
-                cin: cin,
-                dateInscription: dateInscription,
+                ncarnet: ncarnet,
                 stationInscription: stationInscription,
                 permisConfiance: permisConfiance,
                 matricule: matricule,
@@ -56,7 +53,7 @@ const UpdateClient = ({handleClose, clientId}) => {
                 totalPoints: totalPoints,
             };
     
-            const response = await axios.put(`http://localhost:5000/api/clients/${client._id}`, updatedClientData);
+            const response = await axios.put(`http://localhost:5000/api/sopclients/${client._id}`, updatedClientData);
             console.log('Client updated:', response.data);
     
             // Update the client state with the updated data
@@ -84,28 +81,18 @@ const UpdateClient = ({handleClose, clientId}) => {
                                     <div className='addClientBannerForm'>
                                         <div className='addClientInputs'>
                                             <div className='InputsClm1'>
-                                                <label>Numero de Bon</label>
-                                                <input type='number' placeholder={client.numeroBon} value={numeroBon}  onChange={(e) => setNumeroBon(parseInt(e.target.value))} min={0} required/>
-                                            </div>
-                                            <div className='InputsClm1'>
                                                 <label>Nom Complet</label>
                                                 <input type='text' placeholder={client.nomComplet} value={nomComplet} onChange={(e) => setNomComplet(e.target.value)} required/>
                                             </div>
-                                        </div>
-                                        <div className='addClientInputs'>
                                             <div className='InputsClm1'>
                                                 <label>Telephone</label>
                                                 <input type='text' placeholder={client.telephone} value={telephone} onChange={(e) => setTelephone(e.target.value)} required/>
                                             </div>
-                                            <div className='InputsClm1'>
-                                                <label>Cin</label>
-                                                <input type='text' placeholder={client.cin} value={cin} onChange={(e) => setCin(e.target.value)} required/>
-                                            </div>
                                         </div>
                                         <div className='addClientInputs'>
                                             <div className='InputsClm1'>
-                                                <label>Date D'inscription</label>
-                                                <input type='date' placeholder={client.dateInscription} value={dateInscription} onChange={(e) => setDateInscription(e.target.value)} required/>
+                                                <label>ncarnet</label>
+                                                <input type='number' placeholder={client.ncarnet} value={ncarnet} onChange={(e) => setncarnet(e.target.value)} required/>
                                             </div>
                                             <div className='InputsClm1'>
                                                 <label>Station D'inscription</label>
@@ -147,15 +134,25 @@ const UpdateClient = ({handleClose, clientId}) => {
                                                 </div>
                                             </div>
                                             <div className='InputsClm1'>
-                                                <label>Visite Par Mois</label>
-                                                <input type='number' placeholder={client.freqVisiteParMois}  value={freqVisiteParMois} onChange={(e) => setfreqVisiteParMois(parseInt(e.target.value))} required/>
+                                                <label>Type Taxi</label>
+                                                <select value={typeTaxi} onChange={(e) => settypeTaxi(e.target.value)}>
+                                                    <option>Choisir type de taxi</option>
+                                                    <option value='Petit'>Petit</option>
+                                                    <option value='Grand'>Grand</option>
+                                                </select>
                                             </div>
                                         </div>
                                         <div className='addClientInputs'>
                                             <div className='InputsClm1'>
+                                                <label>Visite Par Mois</label>
+                                                <input type='number' placeholder={client.freqVisiteParMois}  value={freqVisiteParMois} onChange={(e) => setfreqVisiteParMois(parseInt(e.target.value))} required/>
+                                            </div>
+                                            <div className='InputsClm1'>
                                                 <label>CA / Visite</label>
                                                 <input type='number' placeholder={client.moyenneCAVisite} value={moyenneCAVisite} onChange={(e) => setmoyenneCAVisite(parseInt(e.target.value))} required/>
                                             </div>
+                                        </div>
+                                        <div className='addClientInputs'>
                                             <div className='InputsClm1'>
                                                 <label>Total Points</label>
                                                 <input type='number' placeholder={client.totalPoints} value={totalPoints} onChange={(e) => setTotalPoints(parseInt(e.target.value))} required/>

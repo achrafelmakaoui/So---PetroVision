@@ -117,6 +117,7 @@
     padding-top: 0.5em;
     border-left: 1px solid #b3b3b3;
     border-right: 1px solid #b3b3b3;
+    border-bottom: 1px solid #b3b3b3;
     
 }
 .cardSupShopIdentity h5{
@@ -298,3 +299,45 @@ svg:hover{
     border: 1px solid #ff5900;
 }
 
+@media screen and (max-width: 1321px){
+    .cardsDsSupShop{
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+        gap: 20px;
+    }
+    .cardDesignSupShop{
+        width: calc(33.33% - 20px);
+        height: fit-content;
+        background-color: white;
+        margin-bottom: 0.85rem;
+    }
+}
+@media screen and (max-width: 1055px){
+    .cardsDsSupShop{
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+        gap: 20px;
+    }
+    .cardDesignSupShop{
+        width: calc(50% - 20px);
+        height: fit-content;
+        background-color: white;
+        margin-bottom: 0.85rem;
+    }
+}
+@media screen and (max-width: 812px){
+    .cardsDsSupShop{
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+        row-gap: 20px;
+    }
+    .cardDesignSupShop{
+        width: calc(100%);
+        height: fit-content;
+        background-color: white;
+        margin-bottom: 0.85rem;
+    }
+}

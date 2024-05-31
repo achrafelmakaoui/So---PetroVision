@@ -1,5 +1,5 @@
 .addTRQr{
-    display: flex;
+    display: grid;
     width: 100%;
     padding: 1.5rem;
     gap: 20px;

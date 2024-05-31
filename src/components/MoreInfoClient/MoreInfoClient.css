@@ -239,6 +239,7 @@
     line-height: 1.2;
     color: rgb(75, 75, 75);
     font-weight: 600;
+    text-transform: capitalize;
 }
 .divCl1Rw2 span:nth-child(1){
     font-family: Poppins,sans-serif;

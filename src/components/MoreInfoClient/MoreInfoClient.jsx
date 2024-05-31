@@ -14,9 +14,9 @@ const MoreInfoClient = ({handleClose , clientNumeroBon}) => {
     useEffect(() => {
         const getClient = async () => {
           try {
-            const res = await axios.get(`http://localhost:5000/api/clients/find/${clientNumeroBon}`);
+            const res = await axios.get(`http://localhost:5000/api/sopclients/find/${clientNumeroBon}`);
             setClient(res.data);
-            setClientTextQrCode(`Hi my name is ${client.nomComplet}`)
+            setClientTextQrCode(`${client.ncarnet}`)
           } catch(err){
               console.log(err)
           }
@@ -33,7 +33,7 @@ const MoreInfoClient = ({handleClose , clientNumeroBon}) => {
       }, [clientNumeroBon,client,clientTextQrCode]);
 
 
-    const dateInscription = client.dateInscription;
+    const dateInscription = client.createdAt;
 
     // Create a Date object from the date string
     const date = new Date(dateInscription);
@@ -61,6 +61,11 @@ const MoreInfoClient = ({handleClose , clientNumeroBon}) => {
     } else{
         proprietaire='Non'
     }
+
+    let moyenneCAVisite = client.moyenneCAVisite
+
+    // Round to 2 decimal places and convert back to a number
+    moyenneCAVisite = parseFloat(Number(moyenneCAVisite).toFixed(2));
   return (
     <div className='MoreInfoClientDiv'>
         <motion.div
@@ -96,8 +101,8 @@ const MoreInfoClient = ({handleClose , clientNumeroBon}) => {
                                 <span>(+212){phoneNumber}</span>
                             </div>
                             <div className='divCl2'>
-                                <span>Cin</span>
-                                <span>{client.cin}</span>
+                                <span>N° carnet</span>
+                                <span>{client.ncarnet}</span>
                             </div>
                             <div className='divCl3'>
                                 <span>Station d'inscription</span>
@@ -127,6 +132,10 @@ const MoreInfoClient = ({handleClose , clientNumeroBon}) => {
                                     <span>Marque de vehicule</span>
                                     <span>{client.marqueVehicule}</span>
                                 </div>
+                                <div className='divCl1Rw2'>
+                                    <span>Type de taxi</span>
+                                    <span>{client.typeTaxi}</span>
+                                </div>
                                 <div className='divCl2Rw2'>
                                     <span>Proprietaire</span>
                                     <span>{proprietaire}</span>
@@ -151,7 +160,7 @@ const MoreInfoClient = ({handleClose , clientNumeroBon}) => {
                             <div className='PointAndVisitescl2'>
                                 <div className='secondOne'>
                                     <span>CA / Visite</span>
-                                    <span>{client.moyenneCAVisite} DH</span>
+                                    <span>{moyenneCAVisite} DH</span>
                                 </div>                                
                                 <div className='secondOneSvg'>
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-dollar-sign">

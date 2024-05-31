@@ -49,21 +49,26 @@ const PompistUI = () => {
 
     const currentUser = useSelector((state) => state.user.currentUser);
     const isPompist = currentUser?.isPompist;
+    const isSupervisor = currentUser?.isSupervisor;
+    const isAdmin = currentUser?.isAdmin;
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                if (!isPompist && searchMode && name) {
-                    const res = await axios.get(`http://192.168.1.101:5000/api/users/search/pompist?name=${name}`);
+                if (!isPompist && !isSupervisor && searchMode && name) {
+                    const res = await axios.get(`http://localhost:5000/api/users/search/pompist?name=${name}`);
                     setPompist(res.data);
-                } else if (isPompist){
+                } else if (isSupervisor && searchMode && name){
+                    const res = await axios.get(`http://localhost:5000/api/users/search/pompist?name=${name}&stationActuel=${currentUser.stationActuel}`);
+                    setPompist(res.data);
+                }else if ((isPompist || isSupervisor)){
                     const stationQueryParam = currentUser.stationActuel ? `?stationActuel=${currentUser.stationActuel}` : '';
-                    const res = await axios.get(`http://192.168.1.101:5000/api/users/pompists${stationQueryParam}`);
+                    const res = await axios.get(`http://localhost:5000/api/users/pompists${stationQueryParam}`);
                     setPompist(res.data);
                 }
                 else {
                     const stationQueryParam = stationActuel ? `?stationActuel=${stationActuel}` : '';
-                    const res = await axios.get(`http://192.168.1.101:5000/api/users/pompists${stationQueryParam}`);
+                    const res = await axios.get(`http://localhost:5000/api/users/pompists${stationQueryParam}`);
                     setPompist(res.data);
                 }
             } catch (error) {
@@ -72,11 +77,11 @@ const PompistUI = () => {
         };
     
         fetchData();
-    }, [searchMode, name, stationActuel,isPompist]);
+    }, [searchMode, name, stationActuel, isPompist, currentUser.stationActuel]);
 
     const deletePomist = async (id) => {
         try {
-          const res = await axios.delete(`http://192.168.1.101:5000/api/users/${id}`);
+          const res = await axios.delete(`http://localhost:5000/api/users/${id}`);
           console.log(res)
         } catch(err){
             console.log(err)
@@ -159,8 +164,7 @@ const PompistUI = () => {
                             <svg className="filterPompistIcon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-filter">
                                 <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
                             </svg>
-                            {isPompist ? <input type='text' name='station' placeholder='Filter By Station' value={currentUser.stationActuel} disabled/> : <input type='text' name='station' placeholder='Filter By Station' value={stationActuel} onChange={(e)=> setStationActuel(e.target.value)}/>}
-                            
+                            {isPompist || isSupervisor ? <input type='text' name='station' placeholder='Filter By Station' value={currentUser.stationActuel} disabled/> : <input type='text' name='station' placeholder='Filter By Station' value={stationActuel} onChange={(e)=> setStationActuel(e.target.value)}/>}
                         </div>
                     </div>
                 </>
@@ -220,6 +224,16 @@ const PompistUI = () => {
                 </>
             ))}
         </div>
+        {isPompist &&
+            <div className="Gear">
+                <Link to='/Setting'>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-settings">
+                        <circle cx="12" cy="12" r="3"></circle>
+                        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                    </svg>
+                </Link>
+            </div>
+        }
         {newPompist && <><NewPompist handleClose={handelClickMoreInfoCloseIcon}/></>}
         {updPompist && <><UpdatePompist handleClose={handelClickMoreInfoCloseIcon} pompistId={pompistId}/></>}
     </div>
