@@ -6,7 +6,7 @@ import './AddTransactionPompist.css'
 import { Link } from 'react-router-dom'
 
 function AddTransactionPompist() {
-    const [qrscan, setQrscan] = useState(66);
+    const [qrscan, setQrscan] = useState();
     const [client, setClient] = useState({});
     // const [station, setStation] = useState('');
     const [ca, setCa] = useState('');
