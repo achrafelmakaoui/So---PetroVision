@@ -13,6 +13,7 @@ function AddTransactionPompist() {
     const [qte, setQte] = useState('');
     const [produitAcheter, setProduitAcheter] = useState('');
     const [photo, setPhoto] = useState(null);
+    const [photo2, setPhoto2] = useState(null);
 
     const currentUser = useSelector((state) => state.user.currentUser);
     // const isPompist = currentUser?.isPompist;
@@ -32,6 +33,9 @@ function AddTransactionPompist() {
     const handlePhotoChange = (e) => {
         setPhoto(e.target.files[0]);
     };
+    const handlePhotoChange2 = (e) => {
+        setPhoto2(e.target.files[0]);
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -44,7 +48,10 @@ function AddTransactionPompist() {
         data.append('qte', qte);
         data.append('produitAcheter', produitAcheter);
         if (photo) {
-            data.append('photo', photo);
+            data.append('imgCounteurWBon', photo);
+        }
+        if (photo2){
+            data.append('imgCounteur', photo2);
         }
 
         try {
@@ -174,8 +181,8 @@ function AddTransactionPompist() {
                                 </div>
                             </div>
                             <div className='addTrInputs'>
-                                <div className='InpsClm1'>
-                                    <label htmlFor="photo">Image-Counter:</label>
+                                <div className='InputsClm1'>
+                                    <label htmlFor="photo">Image-Counteur-Bon:</label>
                                     <input
                                         type="file"
                                         id="photo"
@@ -183,6 +190,18 @@ function AddTransactionPompist() {
                                         accept="image/*"
                                         capture="camera"
                                         onChange={handlePhotoChange}
+                                        required
+                                    />
+                                </div>
+                                <div className='InpsClm1'>
+                                    <label htmlFor="photo2">Image-Counter:</label>
+                                    <input
+                                        type="file"
+                                        id="photo2"
+                                        name="photo2"
+                                        accept="image/*"
+                                        capture="camera"
+                                        onChange={handlePhotoChange2}
                                         required
                                     />
                                 </div>
