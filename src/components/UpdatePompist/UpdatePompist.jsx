@@ -18,7 +18,7 @@ const UpdatePompist = ({handleClose, pompistId}) => {
     useEffect(() => {
         const getPompist = async () => {
           try {
-            const res = await axios.get(`http://localhost:5000/api/users/find/${pompistId}`);
+            const res = await axios.get(`https://so-petrovisionapi.onrender.com/api/users/find/${pompistId}`);
             setPompist(res.data);
           } catch(err){
               console.log(err)
@@ -44,7 +44,7 @@ const UpdatePompist = ({handleClose, pompistId}) => {
     
             };
     
-            const response = await axios.put(`http://localhost:5000/api/users/${pompist._id}`, updatedPompistData);
+            const response = await axios.put(`https://so-petrovisionapi.onrender.com/api/users/${pompist._id}`, updatedPompistData);
             console.log('Client updated:', response.data);
     
             // Update the client state with the updated data

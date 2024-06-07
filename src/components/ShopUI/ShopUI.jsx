@@ -5,6 +5,8 @@ import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 import CoffeeIcon from '../Assets/coffee.png'
 import FtourIcon from '../Assets/breakfast.png'
 import OiIcon from '../Assets/oilicon3d.png'
+import Gift from '../Assets/gift.png'
+import Lavage from '../Assets/lavage.png'
 import axios from 'axios'
 import UpdateShop from '../UpdateShop/UpdateShop'
 import NewShop from '../newShop/NewShop'
@@ -37,7 +39,7 @@ const ShopUI = () => {
 
     const deleteShoop = async (id) => {
         try {
-          const res = await axios.delete(`http://localhost:5000/api/shoop/${id}`);
+          const res = await axios.delete(`https://so-petrovisionapi.onrender.com/api/shoop/${id}`);
           console.log(res)
         } catch(err){
             console.log(err)
@@ -48,9 +50,9 @@ const ShopUI = () => {
         const getShops = async () => {
             let url;
             if (searchMode && searchQuery) {
-                url = `http://localhost:5000/api/shoop/search?name=${searchQuery}`;
+                url = `https://so-petrovisionapi.onrender.com/api/shoop/search?name=${searchQuery}`;
             } else {
-                url = "http://localhost:5000/api/shoop/multiFilter?";
+                url = "https://so-petrovisionapi.onrender.com/api/shoop/multiFilter?";
                 const queryParams = [];
                 
                 if (mois) {
@@ -221,7 +223,7 @@ const ShopUI = () => {
                                 <div className='shopOwner'>
                                     <img
                                         className='shopOwner-Img' 
-                                        src={shop.shoop === 'Coffee' ? CoffeeIcon : shop.shoop === 'Ftour beldi' ? FtourIcon : shop.shoop === 'Shell Oil' ? OiIcon : CoffeeIcon} 
+                                        src={shop.shoop === 'Coffee' ? CoffeeIcon : shop.shoop === 'Ftour beldi' ? FtourIcon : shop.shoop === 'Shell Oil' ? OiIcon :shop.shoop === 'Lavage' ? Lavage : Gift} 
                                         alt='itemShop'
                                     />
                                     <div className='shopOwner-Info'>

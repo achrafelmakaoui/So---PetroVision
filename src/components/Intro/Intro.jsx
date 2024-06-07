@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import './Intro.css';
 
-const Intro = () => {
+const Intro = ({ onComplete }) => {
   
 
   useEffect(() => {
@@ -12,6 +12,13 @@ const Intro = () => {
       });
     }, 4500); // Adjust timing as needed
     }, []);
+    useEffect(() => {
+      const timer = setTimeout(() => {
+        onComplete();
+      }, 7000); // 7 seconds
+  
+      return () => clearTimeout(timer);
+    }, [onComplete]);
   return (
     <section className='intro-section' id='intro'>
       <div className='IntroContainer'>

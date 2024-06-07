@@ -37,7 +37,7 @@ const NewClient = ({handleClose}) => {
                 moyenneCAVisite,
                 totalPoints,
             };
-            const response = await axios.post('http://localhost:5000/api/sopclients/', formData);
+            const response = await axios.post('https://so-petrovisionapi.onrender.com//api/sopclients/', formData);
             console.log('Client added:', response.data);
             handleClose(); // Close the form after successful submission
         } catch (error) {
@@ -69,7 +69,7 @@ const NewClient = ({handleClose}) => {
     const formData = new FormData();
     formData.append("file", selectedFile, selectedFile.name);
     try {
-        const response = await fetch("http://localhost:5000/api/sopclients/upload", {
+        const response = await fetch("https://so-petrovisionapi.onrender.com//api/sopclients/upload", {
         method: "POST",
         body: formData,
         });

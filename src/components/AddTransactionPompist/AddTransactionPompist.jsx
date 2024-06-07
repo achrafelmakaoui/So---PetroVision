@@ -6,7 +6,7 @@ import './AddTransactionPompist.css'
 import { Link } from 'react-router-dom'
 
 function AddTransactionPompist() {
-    const [qrscan, setQrscan] = useState();
+    const [qrscan, setQrscan] = useState(66);
     const [client, setClient] = useState({});
     // const [station, setStation] = useState('');
     const [ca, setCa] = useState('');
@@ -20,7 +20,7 @@ function AddTransactionPompist() {
     useEffect(() => {
         const getClient = async () => {
           try {
-            const res = await axios.get(`http://localhost:5000/api/transaction/clients/${qrscan}`);
+            const res = await axios.get(`https://so-petrovisionapi.onrender.com/api/transaction/clients/${qrscan}`);
             setClient(res.data);
           } catch(err){
               console.log(err)
@@ -48,7 +48,7 @@ function AddTransactionPompist() {
         }
 
         try {
-            const response = await fetch('http://localhost:5000/api/transaction/upload/', {
+            const response = await fetch('https://so-petrovisionapi.onrender.com/api/transaction/upload/', {
                 method: 'POST',
                 body: data,
             });

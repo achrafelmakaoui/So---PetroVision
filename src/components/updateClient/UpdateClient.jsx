@@ -24,7 +24,7 @@ const UpdateClient = ({handleClose, clientId}) => {
     useEffect(() => {
         const getClient = async () => {
           try {
-            const res = await axios.get(`http://localhost:5000/api/sopclients/find/${clientId}`);
+            const res = await axios.get(`https://so-petrovisionapi.onrender.com/api/sopclients/find/${clientId}`);
             setClient(res.data);
           } catch(err){
               console.log(err)
@@ -53,7 +53,7 @@ const UpdateClient = ({handleClose, clientId}) => {
                 totalPoints: totalPoints,
             };
     
-            const response = await axios.put(`http://localhost:5000/api/sopclients/${client._id}`, updatedClientData);
+            const response = await axios.put(`https://so-petrovisionapi.onrender.com/api/sopclients/${client._id}`, updatedClientData);
             console.log('Client updated:', response.data);
     
             // Update the client state with the updated data

@@ -36,7 +36,7 @@ const TransactionUI = () => {
 
     const deleteTransaction = async (id) => {
         try {
-          const res = await axios.delete(`http://localhost:5000/api/transaction/${id}`);
+          const res = await axios.delete(`https://so-petrovisionapi.onrender.com/api/transaction/${id}`);
           console.log(res)
         } catch(err){
             console.log(err)
@@ -47,11 +47,11 @@ const TransactionUI = () => {
         const getTransactions = async () => {
             let url;
             if (!isSupervisor && searchMode && searchQuery) {
-                url = `http://localhost:5000/api/transaction/search?name=${searchQuery}`;
+                url = `https://so-petrovisionapi.onrender.com/api/transaction/search?name=${searchQuery}`;
             } else if (isSupervisor && searchMode && searchQuery) {
-                url = `http://localhost:5000/api/transaction/search?name=${searchQuery}&station=${currentUser.stationActuel}`;
+                url = `https://so-petrovisionapi.onrender.com/api/transaction/search?name=${searchQuery}&station=${currentUser.stationActuel}`;
             } else {
-                url = "http://localhost:5000/api/transaction/multiFilter?";
+                url = "https://so-petrovisionapi.onrender.com/api/transaction/multiFilter?";
                 const queryParams = [];
                 
                 if (mois) {

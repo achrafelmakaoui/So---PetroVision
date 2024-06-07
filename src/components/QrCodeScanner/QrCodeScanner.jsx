@@ -12,11 +12,12 @@ function QRscanner({handleClose}) {
     const [qte, setQte] = useState('');
     const [produitAcheter, setProduitAcheter] = useState('');
     const [photo, setPhoto] = useState(null);
+    const [photo2, setPhoto2] = useState(null);
 
     useEffect(() => {
         const getClient = async () => {
           try {
-            const res = await axios.get(`http://localhost:5000/api/transaction/clients/${qrscan}`);
+            const res = await axios.get(`https://so-petrovisionapi.onrender.com/api/transaction/clients/${qrscan}`);
             setClient(res.data);
           } catch(err){
               console.log(err)
@@ -28,7 +29,9 @@ function QRscanner({handleClose}) {
     const handlePhotoChange = (e) => {
         setPhoto(e.target.files[0]);
     };
-
+    const handlePhotoChange2 = (e) => {
+        setPhoto2(e.target.files[0]);
+    };
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -40,11 +43,14 @@ function QRscanner({handleClose}) {
         data.append('qte', qte);
         data.append('produitAcheter', produitAcheter);
         if (photo) {
-            data.append('photo', photo);
+            data.append('imgCounteurWBon', photo);
+        }
+        if (photo2){
+            data.append('imgCounteur', photo2);
         }
 
         try {
-            const response = await fetch('http://localhost:5000/api/transaction/upload/', {
+            const response = await fetch('https://so-petrovisionapi.onrender.com/api/transaction/upload/', {
                 method: 'POST',
                 body: data,
             });
@@ -175,7 +181,7 @@ function QRscanner({handleClose}) {
                                     </div>
                                     <div className='addTransactionInputs'>
                                         <div className='InputsClm1'>
-                                            <label htmlFor="photo">Image-Counter:</label>
+                                            <label htmlFor="photo">Image-Counteur-Bon:</label>
                                             <input
                                                 type="file"
                                                 id="photo"
@@ -183,6 +189,18 @@ function QRscanner({handleClose}) {
                                                 accept="image/*"
                                                 capture="camera"
                                                 onChange={handlePhotoChange}
+                                                required
+                                            />
+                                        </div>
+                                        <div className='InputsClm1'>
+                                            <label htmlFor="photo2">Image-Counteur:</label>
+                                            <input
+                                                type="file"
+                                                id="photo2"
+                                                name="photo2"
+                                                accept="image/*"
+                                                capture="camera"
+                                                onChange={handlePhotoChange2}
                                                 required
                                             />
                                         </div>

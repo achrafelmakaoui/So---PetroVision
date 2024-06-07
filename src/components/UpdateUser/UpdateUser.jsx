@@ -24,7 +24,7 @@ const UpdateTransaction = ({handleClose, userId}) => {
     useEffect(() => {
         const getUser = async () => {
           try {
-            const res = await axios.get(`http://localhost:5000/api/users/find/${userId}`);
+            const res = await axios.get(`https://so-petrovisionapi.onrender.com/api/users/find/${userId}`);
             setUser(res.data);
           } catch(err){
               console.log(err)
@@ -75,7 +75,7 @@ const UpdateTransaction = ({handleClose, userId}) => {
                 };
             }
 
-            const response = await axios.put(`http://localhost:5000/api/users/${user._id}`, updatedUserData);
+            const response = await axios.put(`https://so-petrovisionapi.onrender.com/api/users/${user._id}`, updatedUserData);
             console.log('User Info updated:', response.data);
 
             setUser(response.data);

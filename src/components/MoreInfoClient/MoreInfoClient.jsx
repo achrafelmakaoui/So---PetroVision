@@ -14,7 +14,7 @@ const MoreInfoClient = ({handleClose , clientNumeroBon}) => {
     useEffect(() => {
         const getClient = async () => {
           try {
-            const res = await axios.get(`http://localhost:5000/api/sopclients/find/${clientNumeroBon}`);
+            const res = await axios.get(`https://so-petrovisionapi.onrender.com/api/sopclients/find/${clientNumeroBon}`);
             setClient(res.data);
             setClientTextQrCode(`${client.ncarnet}`)
           } catch(err){

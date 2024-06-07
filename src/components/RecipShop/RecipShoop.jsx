@@ -10,7 +10,7 @@ const RecipShoop = ({handleClose, shopId}) => {
     useEffect(() => {
         const getRecip = async () => {
           try {
-            const res = await axios.get(`http://localhost:5000/api/shoop/find/${shopId}`);
+            const res = await axios.get(`https://so-petrovisionapi.onrender.com/api/shoop/find/${shopId}`);
             setShop(res.data);
           } catch(err){
               console.log(err)
@@ -38,7 +38,7 @@ const RecipShoop = ({handleClose, shopId}) => {
                     <div className='CounterImg'>
                             {shop.imgRecip && (
                                 <img
-                                    src={`http://localhost:5000/uploads3/${shop.imgRecip}`}
+                                    src={`https://so-petrovisionapi.onrender.com/uploads3/${shop.imgRecip}`}
                                     alt="Img Recip"
                                     style={{ width: '350px', height: 'auto' }}
                                 />

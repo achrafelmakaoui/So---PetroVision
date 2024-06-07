@@ -1,0 +1,69 @@
+.PowerBIAccessToken{
+    width: 100%;
+    height: 100vh;
+    padding: 24px;
+}
+.PowerBIAccessTokenContenet{
+    margin-top: 1.5rem;
+    border: 1px solid #b3b3b3;
+    border-radius: 10px;
+    height: fit-content;
+    padding: 0.85rem 1.85rem;
+}
+.PowerBIAccessTokenContenet h2{
+    font-family: Poppins,sans-serif;
+    font-size: 1.5rem;
+    line-height: 1.4;
+    color: #ff5900;
+  }
+.AcessTokenFormul form{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+    padding: 0.85rem 0rem;
+}
+.formDiv1{
+    display: grid;
+    gap: 15px;
+    width: 60%;
+}
+.formDiv1 label{
+    font-family: Poppins,sans-serif;
+    font-size: 1rem;
+    line-height: 1.2;
+    color: rgb(75, 75, 75);
+    font-weight: 400;
+}
+.formDiv1 input{
+    width: 100%;
+    font-family: "Jost", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 0.95rem;
+    color: #1c1c1c;
+    padding: 0.35rem 0.5rem;
+    border: 1px solid #b3b3b3;
+    border-radius: 3px;
+    outline: none;
+}
+form .formbtnPowerbi{
+    background-color: #ff5900;
+    border-radius: 5px;
+    height: 35px;
+    width: 100%;
+    padding: 0;
+    color: white;
+    font-family: Poppins,sans-serif;
+    font-size: 0.85rem;
+    line-height: 1.2;
+    font-weight: 500;
+    cursor: pointer;
+}
+form .formDivBtn{
+    width: 15%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+}

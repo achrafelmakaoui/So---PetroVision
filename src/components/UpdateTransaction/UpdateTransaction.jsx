@@ -19,7 +19,7 @@ const UpdateTransaction = ({handleClose, transactionId}) => {
     useEffect(() => {
         const getSuperviseur = async () => {
           try {
-            const res = await axios.get(`http://localhost:5000/api/transaction/find/${transactionId}`);
+            const res = await axios.get(`https://so-petrovisionapi.onrender.com/api/transaction/find/${transactionId}`);
             setTransaction(res.data);
           } catch(err){
               console.log(err)
@@ -42,6 +42,7 @@ const UpdateTransaction = ({handleClose, transactionId}) => {
                     qte,
                     produitAcheter,
                     imgCounteur:transaction.imgCounteur,
+                    imgCounteurWBon:transaction.imgCounteurWBon,
                     status,
                 };
             } else if (isSupervisor) {
@@ -53,10 +54,11 @@ const UpdateTransaction = ({handleClose, transactionId}) => {
                     qte,
                     produitAcheter,
                     imgCounteur:transaction.imgCounteur,
+                    imgCounteurWBon:transaction.imgCounteurWBon,
                     status:transaction.status,
                 };
             }
-            const response = await axios.put(`http://localhost:5000/api/transaction/${transaction._id}`, updatedSupervisorData);
+            const response = await axios.put(`https://so-petrovisionapi.onrender.com/api/transaction/${transaction._id}`, updatedSupervisorData);
             console.log('Transaction updated:', response.data);
     
             // Update the Transaction state with the updated data
@@ -119,8 +121,8 @@ const UpdateTransaction = ({handleClose, transactionId}) => {
                                         </div>
                                         <div className='addClientInputs'>
                                             <div className='InputsClm1'>
-                                                <label>Image-Counter</label>
-                                                <input type='text' placeholder={transaction.imgCounteur} value={transaction.imgCounteur} disabled required/>
+                                                <label>Image-Counter-Bon</label>
+                                                <input type='text' placeholder={transaction.imgCounteurWBon} value={transaction.imgCounteurWBon} disabled required/>
                                             </div>
                                             {!isSupervisor && 
                                                 <div className='InputsClm1'>
@@ -132,6 +134,12 @@ const UpdateTransaction = ({handleClose, transactionId}) => {
                                                     </select>
                                                 </div>
                                             }
+                                        </div>
+                                        <div className='addClientInputs'>
+                                            <div className='InputsClm1'>
+                                                <label>Image-Counter</label>
+                                                <input type='text' placeholder={transaction.imgCounteur} value={transaction.imgCounteur} disabled required/>
+                                            </div>
                                         </div>
                                     </div>
                                     <div className='btnSubmit'>

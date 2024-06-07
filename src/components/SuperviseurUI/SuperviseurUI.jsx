@@ -49,11 +49,11 @@ const SupervisuerUI = () => {
         const fetchData = async () => {
             try {
                 if (searchMode && name) {
-                    const res = await axios.get(`http://localhost:5000/api/users/search?name=${name}`);
+                    const res = await axios.get(`https://so-petrovisionapi.onrender.com/api/users/search?name=${name}`);
                     setSupervisor(res.data);
                 } else {
                     const stationQueryParam = stationActuel ? `?stationActuel=${stationActuel}` : '';
-                    const res = await axios.get(`http://localhost:5000/api/users/supervisors${stationQueryParam}`);
+                    const res = await axios.get(`https://so-petrovisionapi.onrender.com/api/users/supervisors${stationQueryParam}`);
                     setSupervisor(res.data);
                 }
             } catch (error) {
@@ -66,7 +66,7 @@ const SupervisuerUI = () => {
 
     const deleteSupervisor = async (id) => {
         try {
-          const res = await axios.delete(`http://localhost:5000/api/users/${id}`);
+          const res = await axios.delete(`https://so-petrovisionapi.onrender.com/api/users/${id}`);
           console.log(res)
         } catch(err){
             console.log(err)

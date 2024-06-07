@@ -56,19 +56,19 @@ const PompistUI = () => {
         const fetchData = async () => {
             try {
                 if (!isPompist && !isSupervisor && searchMode && name) {
-                    const res = await axios.get(`http://localhost:5000/api/users/search/pompist?name=${name}`);
+                    const res = await axios.get(`https://so-petrovisionapi.onrender.com/api/users/search/pompist?name=${name}`);
                     setPompist(res.data);
                 } else if (isSupervisor && searchMode && name){
-                    const res = await axios.get(`http://localhost:5000/api/users/search/pompist?name=${name}&stationActuel=${currentUser.stationActuel}`);
+                    const res = await axios.get(`https://so-petrovisionapi.onrender.com/api/users/search/pompist?name=${name}&stationActuel=${currentUser.stationActuel}`);
                     setPompist(res.data);
                 }else if ((isPompist || isSupervisor)){
                     const stationQueryParam = currentUser.stationActuel ? `?stationActuel=${currentUser.stationActuel}` : '';
-                    const res = await axios.get(`http://localhost:5000/api/users/pompists${stationQueryParam}`);
+                    const res = await axios.get(`https://so-petrovisionapi.onrender.com/api/users/pompists${stationQueryParam}`);
                     setPompist(res.data);
                 }
                 else {
                     const stationQueryParam = stationActuel ? `?stationActuel=${stationActuel}` : '';
-                    const res = await axios.get(`http://localhost:5000/api/users/pompists${stationQueryParam}`);
+                    const res = await axios.get(`https://so-petrovisionapi.onrender.com/api/users/pompists${stationQueryParam}`);
                     setPompist(res.data);
                 }
             } catch (error) {
@@ -81,7 +81,7 @@ const PompistUI = () => {
 
     const deletePomist = async (id) => {
         try {
-          const res = await axios.delete(`http://localhost:5000/api/users/${id}`);
+          const res = await axios.delete(`https://so-petrovisionapi.onrender.com/api/users/${id}`);
           console.log(res)
         } catch(err){
             console.log(err)

@@ -15,7 +15,7 @@ const UpdateShop = ({handleClose, shopId}) => {
     useEffect(() => {
         const getShop = async () => {
           try {
-            const res = await axios.get(`http://localhost:5000/api/shoop/find/${shopId}`);
+            const res = await axios.get(`https://so-petrovisionapi.onrender.com/api/shoop/find/${shopId}`);
             setShop(res.data);
           } catch(err){
               console.log(err)
@@ -39,7 +39,7 @@ const UpdateShop = ({handleClose, shopId}) => {
                 imgRecip:shop.imgRecip,
             };
     
-            const response = await axios.put(`http://localhost:5000/api/shoop/${shop._id}`, updatedShopData);
+            const response = await axios.put(`https://so-petrovisionapi.onrender.com/api/shoop/${shop._id}`, updatedShopData);
             console.log('Shop updated:', response.data);
     
             // Update the Shop state with the updated data

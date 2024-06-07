@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 import Intro from './components/Intro/Intro'
 import Login from './components/Login/Login'
 import DashLandingPage from './components/DashLandPage/DashLandingPage';
@@ -14,12 +14,14 @@ import TransactionUI from './components/TransactionUI/TransactionUI';
 import ShopUI from './components/ShopUI/ShopUI';
 import SettingUI from './components/SettingUI/SettingUI';
 import NewShop from './components/newShop/NewShop';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import AddTransactionPompist from './components/AddTransactionPompist/AddTransactionPompist';
 import AddShopSuperviseurShop from './components/AddShopSuperviseurShop/AddShopSuperviseurShop';
+import { logout } from './components/redux/userRedux';
+import PowerBIAccessToken from './components/PowerBIAccessToken/PowerBIAccessToken';
 
 function App() {
-  // const [introComplete, setIntroComplete] = useState(false);
+  const [introComplete, setIntroComplete] = useState(false);
 
   const currentUser = useSelector((state) => state.user.currentUser);
   const isAdmin = currentUser?.isAdmin;
@@ -27,23 +29,27 @@ function App() {
   const isSupervisorShop = currentUser?.isSupervisorShoop;
   const isPompist = currentUser?.isPompist;
   const isClient = !isAdmin && !isSupervisor && !isSupervisorShop && !isPompist;
-  // useEffect(() => {
-  //   const hasSeenIntro = localStorage.getItem('hasSeenIntro');
-  //   if (hasSeenIntro) {
-  //     setIntroComplete(true);
-  //   } else {
-  //     setTimeout(() => {
-  //       setIntroComplete(true);
-  //       localStorage.setItem('hasSeenIntro', 'true');
-  //     }, 7000);
-  //   }
-  // }, []);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (!currentUser && introComplete) {
+      navigate('/login');
+    } else if (!currentUser && !introComplete) {
+      navigate('/intro');
+    }
+  }, [currentUser, introComplete, navigate]);
+
+  const handleLogout = () => {
+    // Dispatch the logout action
+    dispatch(logout());
+    setIntroComplete(false);
+    navigate('/intro');
+  };
 
   return (
     <div className="App">
-      {currentUser && <Sideber/>}
-      {/* {!isPompist && <Sideber/>} */}
-      {/* {!isSupervisorShop && <Sideber/>} */}
+      {currentUser && (isAdmin || isSupervisor || isSupervisorShop) && <Sideber onLogout={handleLogout} />}
       <Routes>
         {isAdmin ? 
           (
@@ -56,9 +62,10 @@ function App() {
               <Route path="/transaction" element={<><TransactionUI/></>}/>
               <Route path="/shop" element={<><ShopUI/></>}/>
               <Route path="/Setting" element={<><SettingUI/></>}/>
-              <Route path="/intro" element={<><Intro /></>}/>
+              <Route path="/intro" element={<Intro onComplete={() => setIntroComplete(true)} />}/>
               <Route path="/qrcode" element={<><QrCodeScanner/></>}/>
               <Route path="/qrcodeshop" element={<><NewShop/></>}/>
+              <Route path="/PowerBIAccessToken" element={<><PowerBIAccessToken/></>}/>
             </>
           )
           : currentUser ?
@@ -92,7 +99,7 @@ function App() {
             </>
           ) : (
             <>
-              <Route path="/intro" element={<><Intro /></>}/>
+              <Route path="/intro" element={<><Intro onComplete={() => setIntroComplete(true)}/></>}/>
               <Route path="/login" element={<><Login/></>}/>
             </>
           )

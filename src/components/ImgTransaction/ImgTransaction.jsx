@@ -10,7 +10,7 @@ const ImgTransaction = ({handleClose, transactionId}) => {
     useEffect(() => {
         const getSuperviseur = async () => {
           try {
-            const res = await axios.get(`http://localhost:5000/api/transaction/find/${transactionId}`);
+            const res = await axios.get(`https://so-petrovisionapi.onrender.com/api/transaction/find/${transactionId}`);
             setTransaction(res.data);
           } catch(err){
               console.log(err)
@@ -38,9 +38,9 @@ const ImgTransaction = ({handleClose, transactionId}) => {
                     <div className='CounterImg'>
                             {transaction.imgCounteur && (
                                 <img
-                                    src={`http://localhost:5000/uploads2/${transaction.imgCounteur}`}
+                                    src={`https://so-petrovisionapi.onrender.com/uploads2/${transaction.imgCounteurWBon}`}
                                     alt="Img Counteur"
-                                    style={{ width: '350px', height: 'auto' }}
+                                    style={{ width: '300px', height: 'auto' }}
                                 />
                             )}
                     </div>

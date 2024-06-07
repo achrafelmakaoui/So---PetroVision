@@ -41,7 +41,7 @@
     font-family: Poppins,sans-serif;
     font-size: 1.5rem;
     line-height: 1.4;
-    color: #ff5900;
+    color: #ff2f00;
 }
 .addClientBannerForm{
     display: flex;
@@ -105,7 +105,7 @@
     right: 0;
     margin-top: 1rem;
     margin-right: 1rem;
-    stroke: #ff5900;
+    stroke: #ff2f00;
     cursor: pointer;
 }
 .btnSubmit{
@@ -119,7 +119,7 @@
     align-items: center;
     gap: 10px;
     width: 15%;
-    background-color: #ff5900;
+    background-color: #ff2f00;
     border-radius: 5px;
     height: 35px;
     padding: 0;

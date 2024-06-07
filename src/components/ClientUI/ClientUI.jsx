@@ -89,11 +89,11 @@ const ClientUI = () => {
         const getClients = async () => {
             let url;
             if (!isSupervisor && searchMode && name) {
-                url = `http://localhost:5000/api/sopclients/search?name=${name}`;
+                url = `https://so-petrovisionapi.onrender.com/api/sopclients/search?name=${name}`;
             } else if (isSupervisor && searchMode && name){
-                url = `http://localhost:5000/api/sopclients/search?name=${name}&stationInscription=${currentUser.stationActuel}`;
+                url = `https://so-petrovisionapi.onrender.com/api/sopclients/search?name=${name}&stationInscription=${currentUser.stationActuel}`;
             } else {
-                url = "http://localhost:5000/api/sopclients/multiFilter?";
+                url = "https://so-petrovisionapi.onrender.com/api/sopclients/multiFilter?";
                 if (isChecked1) {
                     url += "proprietaire=oui&";
                 } else if (isChecked2) {
@@ -122,7 +122,7 @@ const ClientUI = () => {
 
     const deleteClient = async (id) => {
         try {
-          const res = await axios.delete(`http://localhost:5000/api/sopclients/${id}`);
+          const res = await axios.delete(`https://so-petrovisionapi.onrender.com/api/sopclients/${id}`);
           console.log(res)
         } catch(err){
             console.log(err)

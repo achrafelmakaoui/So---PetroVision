@@ -13,10 +13,43 @@ function NewShop({handleClose}) {
     const [pointShoop, setPointShoop] = useState('');
     const [photo, setPhoto] = useState(null);
 
+    const handleTypeShoopChange = (e) => {
+        setTypeShoop(e.target.value);
+        // Reset the selected shop when the type changes
+        setShoop('');
+    };
+
+    const renderShopOptions = () => {
+        if (typeShoop === 'Shop') {
+            return (
+                <>
+                    <option value='Coffee'>Coffee</option>
+                    <option value='Tea'>Tea</option>
+                    <option value='Ftour beldi'>Ftour beldi</option>
+                    <option value='Lavage'>Lavage</option>
+                    <option value='Shell Oil'>Shell Oil</option>
+                </>
+            );
+        } else if (typeShoop === 'Gift') {
+            return (
+                <>
+                    <option value='Tapis de prière'>Tapis de prière</option>
+                    <option value='Pare-Soleil'>Pare-Soleil</option>
+                    <option value='Gourde'>Gourde</option>
+                    <option value='Repose Tête'>Repose Tête</option>
+                    <option value='Porte clés'>Porte clés</option>
+                    <option value='Stylo'>Stylo</option>
+                </>
+            );
+        } else {
+            return <option>Select Shop Type First</option>;
+        }
+    };
+
     useEffect(() => {
         const getClient = async () => {
           try {
-            const res = await axios.get(`http://localhost:5000/api/shoop/clients/${qrscan}`);
+            const res = await axios.get(`https://so-petrovisionapi.onrender.com/api/shoop/clients/${qrscan}`);
             setClient(res.data);
           } catch(err){
               console.log(err)
@@ -44,7 +77,7 @@ function NewShop({handleClose}) {
         }
 
         try {
-            const response = await fetch('http://localhost:5000/api/shoop/upload/', {
+            const response = await fetch('https://so-petrovisionapi.onrender.com/api/shoop/upload/', {
                 method: 'POST',
                 body: data,
             });
@@ -138,7 +171,7 @@ function NewShop({handleClose}) {
                                             <select
                                                 name='typeShoop'
                                                 value={typeShoop}
-                                                onChange={(e) => setTypeShoop(e.target.value)}
+                                                onChange={handleTypeShoopChange}
                                                 required
                                             >
                                                 <option>Entre typeShoop</option>
@@ -156,10 +189,8 @@ function NewShop({handleClose}) {
                                                 onChange={(e) => setShoop(e.target.value)}
                                                 required
                                             >
-                                                <option>Entre shop</option>
-                                                <option value='Coffee'>Coffee</option>
-                                                <option value='Ftour beldi'>Ftour beldi</option>
-                                                <option value='Shell Oil'>Shell Oil</option>
+                                                <option value=''>Entre shop</option>
+                                                {renderShopOptions()}
                                             </select>
                                         </div>
                                         <div className='InputsClm1'>

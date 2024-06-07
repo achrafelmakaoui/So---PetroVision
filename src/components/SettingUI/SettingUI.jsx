@@ -22,7 +22,6 @@ const SettingUI = () => {
   const handelClickUpdateUser = () => {
     setUpdateUser(true);
   }
-  
   const dispatch = useDispatch();
 
   const handelClickDeleteBtn = () => {
@@ -40,7 +39,7 @@ const SettingUI = () => {
   const isPompistAndSuperShop = isSupervisorShop || isPompist;
 
   const handleDelete = () => {
-    axios.delete(`http://localhost:5000/api/users/${currentUserId}`)
+    axios.delete(`https://so-petrovisionapi.onrender.com/api/users/${currentUserId}`)
       .then(response => {
         console.log(response.data);
         dispatch(logout());
@@ -53,7 +52,7 @@ const SettingUI = () => {
   useEffect(() => {
     const getUser = async () => {
       try {
-        const res = await axios.get(`http://localhost:5000/api/users/find/${currentUserId}`);
+        const res = await axios.get(`https://so-petrovisionapi.onrender.com/api/users/find/${currentUserId}`);
         setUser(res.data);
       } catch(err){
           console.log(err)

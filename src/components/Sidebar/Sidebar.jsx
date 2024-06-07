@@ -2,11 +2,11 @@ import React from 'react';
 import './Sidebar.css';
 import Sopetrole from '../Assets/sopetrole12.png';
 import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { logout } from '../redux/userRedux';
+// import { useDispatch } from 'react-redux';
+// import { logout } from '../redux/userRedux';
 import { useSelector } from 'react-redux';
 
-const Sidebar = () => {
+const Sidebar = ({ onLogout }) => {
 
   const currentUser = useSelector((state) => state.user.currentUser);
   const isSupervisor = currentUser?.isSupervisor;
@@ -19,11 +19,11 @@ const Sidebar = () => {
     return "Client";
   };
 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
    
-  const handleLogoutClick = () => {
-    dispatch(logout());
-  };
+  // const handleLogoutClick = () => {
+  //   dispatch(logout());
+  // };
   return (
       <div className="sidebar">
         <div class="head">
@@ -140,6 +140,16 @@ const Sidebar = () => {
           </div>
           <div class="menu">
             <ul>
+              {!isSupervisor &&
+                <li>
+                  <Link to="/PowerBIAccessToken">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-activity">
+                      <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+                    </svg>
+                    <span class="text">PowerBI</span>
+                  </Link>
+                </li>
+              }
               <li>
                 <Link to="/Setting">
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-settings">
@@ -154,7 +164,7 @@ const Sidebar = () => {
         </div>
         <div class="menu">
           <ul>
-            <li onClick={handleLogoutClick}>
+            <li onClick={onLogout}>
               <Link to="/Logout">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-log-out">
                   <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>

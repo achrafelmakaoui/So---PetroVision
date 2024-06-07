@@ -17,7 +17,7 @@ const UpdateSuperviseurShoop = ({handleClose, superviseurShoopId}) => {
     useEffect(() => {
         const getSuperviseur = async () => {
           try {
-            const res = await axios.get(`http://localhost:5000/api/users/find/${superviseurShoopId}`);
+            const res = await axios.get(`https://so-petrovisionapi.onrender.com/api/users/find/${superviseurShoopId}`);
             setSuperviseurShoop(res.data);
           } catch(err){
               console.log(err)
@@ -42,7 +42,7 @@ const UpdateSuperviseurShoop = ({handleClose, superviseurShoopId}) => {
     
             };
     
-            const response = await axios.put(`http://localhost:5000/api/users/${superviseurShoop._id}`, updatedSupervisorData);
+            const response = await axios.put(`https://so-petrovisionapi.onrender.com/api/users/${superviseurShoop._id}`, updatedSupervisorData);
             console.log('Client updated:', response.data);
     
             // Update the client state with the updated data

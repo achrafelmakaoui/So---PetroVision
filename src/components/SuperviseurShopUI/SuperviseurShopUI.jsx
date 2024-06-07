@@ -49,21 +49,22 @@ const SuperviseurShopUI = () => {
 
     const currentUser = useSelector((state) => state.user.currentUser);
     const isSupervisorShop = currentUser?.isSupervisorShoop;
+    const isPompist = currentUser?.isPompist;
 
     useEffect(() => {
         const fetchData = async () => {
             try {
                 if (searchMode && name) {
-                    const res = await axios.get(`http://localhost:5000/api/users/search/SupervisorShoop?name=${name}`);
+                    const res = await axios.get(`https://so-petrovisionapi.onrender.com/api/users/search/SupervisorShoop?name=${name}`);
                     setSupervisorShoop(res.data);
                 } else if (isSupervisorShop){
                     const stationQueryParam = currentUser.stationActuel ? `?stationActuel=${currentUser.stationActuel}` : '';
-                    const res = await axios.get(`http://localhost:5000/api/users/supervisorshoop${stationQueryParam}`);
+                    const res = await axios.get(`https://so-petrovisionapi.onrender.com/api/users/supervisorshoop${stationQueryParam}`);
                     setSupervisorShoop(res.data);
                 }
                 else {
                     const stationQueryParam = stationActuel ? `?stationActuel=${stationActuel}` : '';
-                    const res = await axios.get(`http://localhost:5000/api/users/supervisorshoop${stationQueryParam}`);
+                    const res = await axios.get(`https://so-petrovisionapi.onrender.com/api/users/supervisorshoop${stationQueryParam}`);
                     setSupervisorShoop(res.data);
                 }
             } catch (error) {
@@ -76,7 +77,7 @@ const SuperviseurShopUI = () => {
 
     const deleteSupervisorShoop = async (id) => {
         try {
-          const res = await axios.delete(`http://localhost:5000/api/users/${id}`);
+          const res = await axios.delete(`https://so-petrovisionapi.onrender.com/api/users/${id}`);
           console.log(res)
         } catch(err){
             console.log(err)
@@ -218,14 +219,16 @@ const SuperviseurShopUI = () => {
                 </>
             ))}
         </div>
-        <div className="Gear">
-            <Link to='/Setting'>
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-settings">
-                    <circle cx="12" cy="12" r="3"></circle>
-                    <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
-                </svg>
-            </Link>
-        </div>
+        {isPompist &&
+            <div className="Gear">
+                <Link to='/Setting'>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-settings">
+                        <circle cx="12" cy="12" r="3"></circle>
+                        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                    </svg>
+                </Link>
+            </div>
+        }
         {newSuperviseurShoop && <><NewSuperviseurShoop handleClose={handelClickMoreInfoCloseIcon}/></>}
         {updSuperviseurShoop && <><UpdateSuperviseurShoop handleClose={handelClickMoreInfoCloseIcon} superviseurShoopId={superviseurShoopId}/></>}
     </div>

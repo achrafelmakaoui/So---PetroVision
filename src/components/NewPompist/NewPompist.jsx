@@ -26,7 +26,7 @@ const NewPomist = ({handleClose}) => {
                 shift,
                 isPompist:true
             };
-            const response = await axios.post('http://localhost:5000/api/auth/register', formData);
+            const response = await axios.post('https://so-petrovisionapi.onrender.com/api/auth/register', formData);
             console.log('pompist added:', response.data);
             handleClose(); // Close the form after successful submission
         } catch (error) {
@@ -59,7 +59,7 @@ const NewPomist = ({handleClose}) => {
     const formData = new FormData();
     formData.append("file", selectedFile, selectedFile.name);
     try {
-        const response = await fetch("http://localhost:5000/api/clints/upload", {
+        const response = await fetch("https://so-petrovisionapi.onrender.com/api/clints/upload", {
         method: "POST",
         body: formData,
         });
