@@ -38,7 +38,7 @@ const ImgTransaction = ({handleClose, transactionId}) => {
                     <div className='CounterImg'>
                             {transaction.imgCounteur && (
                                 <img
-                                    src={`https://so-petrovisionapi.onrender.com/uploads2/${transaction.imgCounteurWBon}`}
+                                    src={`https://so-petrovisionapi.onrender.com/uploads2/${transaction.imgCounteur}`}
                                     alt="Img Counteur"
                                     style={{ width: '300px', height: 'auto' }}
                                 />
