@@ -30,7 +30,7 @@ const Intro = ({ onComplete }) => {
           </svg>
         </div>
         <div className='intro-content'>
-          <h1><span>So - PetroVision</span></h1>
+          <h1><span>SOPETROLE</span></h1>
         </div>
       </div>
     </section>
