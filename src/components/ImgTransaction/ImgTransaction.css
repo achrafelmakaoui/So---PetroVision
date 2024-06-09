@@ -1,0 +1,51 @@
+.ImgTransactionDiv{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.232);
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 999;
+    width: 100%;
+    height: 100vh;
+  }
+.ImgTransactionAlert{
+    width: fit-content;
+    height: fit-content;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0px 2px 12px 0px rgba(28, 28, 28, 0.247);
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.ImgTransactionContent{
+    display: grid;
+    width: 100%;
+    padding: 1.5rem;
+}
+.ImgTransactionCl1{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.ImgTransactionCl1 h2{
+    font-family: Poppins,sans-serif;
+    font-size: 1.5rem;
+    line-height: 1.4;
+    color: #ff5900;
+} 
+.CounterImg img{
+    margin-top: 1rem;
+    border-radius: 10px;
+}
+.ImgTransactionContent svg{
+    stroke: #ff5900;
+    cursor: pointer;
+}
+
