@@ -44,7 +44,7 @@ function AddTransactionPompist() {
         data.append('qte', qte);
         data.append('produitAcheter', produitAcheter);
         if (photo){
-            data.append('imgCounteur', photo);
+            data.append('photo', photo);
         }
 
         try {

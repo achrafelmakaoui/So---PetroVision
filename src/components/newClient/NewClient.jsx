@@ -69,7 +69,7 @@ const NewClient = ({handleClose}) => {
     const formData = new FormData();
     formData.append("file", selectedFile, selectedFile.name);
     try {
-        const response = await fetch("https://so-petrovisionapi.onrender.com//api/sopclients/upload", {
+        const response = await fetch("https://so-petrovisionapi.onrender.com/api/sopclients/upload", {
         method: "POST",
         body: formData,
         });
