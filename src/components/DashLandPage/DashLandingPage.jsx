@@ -27,8 +27,8 @@ const DashLandingPage = () => {
                 <PowerBIEmbed
                     embedConfig={{
                         type: 'report',
-                        id: '44527c46-af7d-4e03-b384-b67d3987aeff',
-                        embedUrl: "https://app.powerbi.com/reportEmbed?reportId=44527c46-af7d-4e03-b384-b67d3987aeff&groupId=ea2bc6bc-9416-499a-ae83-370431ccea97&w=2&config=eyJjbHVzdGVyVXJsIjoiaHR0cHM6Ly9XQUJJLU5PUlRILUVVUk9QRS1yZWRpcmVjdC5hbmFseXNpcy53aW5kb3dzLm5ldCIsImVtYmVkRmVhdHVyZXMiOnsidXNhZ2VNZXRyaWNzVk5leHQiOnRydWV9fQ%3d%3d",
+                        id: '63eafe16-8205-412f-8bd7-7190ec96b44a',
+                        embedUrl: "https://app.powerbi.com/reportEmbed?reportId=63eafe16-8205-412f-8bd7-7190ec96b44a&groupId=ea2bc6bc-9416-499a-ae83-370431ccea97&w=2&config=eyJjbHVzdGVyVXJsIjoiaHR0cHM6Ly9XQUJJLU5PUlRILUVVUk9QRS1yZWRpcmVjdC5hbmFseXNpcy53aW5kb3dzLm5ldCIsImVtYmVkRmVhdHVyZXMiOnsidXNhZ2VNZXRyaWNzVk5leHQiOnRydWV9fQ%3d%3d",
                         accessToken: accessToken,
                         tokenType: models.TokenType.Aad, // Use models.TokenType.Aad for SaaS embed
                         settings: {
